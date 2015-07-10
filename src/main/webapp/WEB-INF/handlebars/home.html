@@ -1,15 +1,8 @@
-<html>
-<head>
-<title>The Tree</title>
-<link rel="stylesheet" href="/tree/static/css/styles.css" type="text/css" />
-</head>
-<body>
-<h1>The Tree</h1>
-<div id="content">
+{{> base }}
+
+{{# partial "content" }}
     <h2>Users</h2>
     <ul>{{# userList }}
         <li>{{ username }} ({{ email }})</li>
     {{/ userList }}</ul>
-</div>
-</body>
-</html>
+{{/ partial }}
