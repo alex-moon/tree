@@ -16,8 +16,7 @@ public class TreeController {
      
     @Autowired
     private IUserDAO userDao;
-    
-    @Secured({"ROLE_ADMIN"})
+
     @RequestMapping(value="/")
     public ModelAndView home() {
         List<User> listUsers = userDao.list();
