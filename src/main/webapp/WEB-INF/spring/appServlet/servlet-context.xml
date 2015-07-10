@@ -21,10 +21,11 @@
         <property name="suffix" value=".html" />
     </bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/tree"/>
-        <property name="username" value="tree"/>
+    <bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
+        <property name="serverName" value="127.0.0.1"/>
+        <property name="databaseName" value="tree"/>
+        <property name="portNumber" value="5432"/>
+        <property name="user" value="tree"/>
         <property name="password" value="tree"/>
     </bean>
 
