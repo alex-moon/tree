@@ -1,5 +1,26 @@
-{{> base }}
-
 {{# partial "content" }}
-    <h2>Poo Boots lol</h2>
+    <h2>Login</h2>
+    <form id="form" method="POST">
+        <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
+        {{# if err }}
+            <div>Something went wrong lol</div>
+        {{/ if }}
+        {{# if out }}
+            <div>You've logged out successfully.</div>
+        {{/ if }}
+        {{# if time }}
+            <div>You've been logged out due to inactivity.</div>
+        {{/ if }}
+
+        <div>
+            <label>Username: <input type="text" name="username" value=""/></label>
+        </div>
+        <div>
+            <label>Password: <input type="password" name="password" value=""/></label>
+        </div>
+         
+        <input value="Login" name="submit" type="submit"/>
+    </form>
 {{/ partial }}
+
+{{> base }}

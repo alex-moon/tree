@@ -5,26 +5,24 @@
     xmlns:security="http://www.springframework.org/schema/security"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-">
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:global-method-security secured-annotations="enabled" />
     
     <security:http auto-config="true">
         <!-- Restrict URLs based on role -->
         <security:intercept-url pattern="/login*" access="permitAll" />
-        <security:intercept-url pattern="/logoutSuccess" access="permitAll" />
         
         <security:intercept-url pattern="/static/**" access="permitAll" />
 
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
         <!-- Override default login and logout pages -->
-        <security:form-login login-page="/login" 
-                             login-processing-url="/loginProcess" 
-                             default-target-url="/" 
+        <security:form-login login-page="/login"
+                             login-processing-url="/login"
+                             default-target-url="/"
                              authentication-failure-url="/login" />
-        <security:logout logout-url="/logout" logout-success-url="/logoutSuccess" />
+        <security:logout logout-url="/logout" logout-success-url="/login" />
     </security:http>
 
     <security:authentication-manager>

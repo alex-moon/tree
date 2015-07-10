@@ -19,6 +19,7 @@
     <bean id="viewResolver" class="com.github.jknack.handlebars.springmvc.HandlebarsViewResolver">
         <property name="prefix" value="/WEB-INF/handlebars/" />
         <property name="suffix" value=".html" />
+        <property name="exposeRequestAttributes" value="true" />
     </bean>
 
     <!--bean id="resourceResolver" class="org.springframework.web.servlet.resource.PathResourceResolver" /-->
