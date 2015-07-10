@@ -3,4 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
+    <bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
+        <property name="serverName" value="127.0.0.1"/>
+        <property name="databaseName" value="tree"/>
+        <property name="portNumber" value="5432"/>
+        <property name="user" value="tree"/>
+        <property name="password" value="tree"/>
+    </bean>
+
 </beans>

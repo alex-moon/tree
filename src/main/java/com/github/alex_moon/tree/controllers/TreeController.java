@@ -3,6 +3,7 @@ package com.github.alex_moon.tree.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +16,8 @@ public class TreeController {
      
     @Autowired
     private IUserDAO userDao;
-     
+    
+    @Secured({"ROLE_ADMIN"})
     @RequestMapping(value="/")
     public ModelAndView home() {
         List<User> listUsers = userDao.list();

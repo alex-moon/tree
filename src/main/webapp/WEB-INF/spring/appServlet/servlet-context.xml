@@ -23,14 +23,6 @@
 
     <!--bean id="resourceResolver" class="org.springframework.web.servlet.resource.PathResourceResolver" /-->
 
-    <bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
-        <property name="serverName" value="127.0.0.1"/>
-        <property name="databaseName" value="tree"/>
-        <property name="portNumber" value="5432"/>
-        <property name="user" value="tree"/>
-        <property name="password" value="tree"/>
-    </bean>
-
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:hibernate.cfg.xml" />
