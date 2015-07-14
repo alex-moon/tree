@@ -15,6 +15,10 @@
         
         <security:intercept-url pattern="/static/**" access="permitAll" />
 
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+
+        <security:intercept-url pattern="/customers/**" access="hasRole('ROLE_OUTLET_MANAGER')" />
+
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
         <!-- Override default login and logout pages -->
@@ -30,5 +34,19 @@
             <security:jdbc-user-service data-source-ref="dataSource" />
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <constructor-arg ref="roleHierarchy" />
+    </bean>
+    <bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <property name="hierarchy">
+            <value>
+                ROLE_ADMIN > ROLE_REGION_MANAGER
+                ROLE_REGION_MANAGER > ROLE_AREA_MANAGER
+                ROLE_AREA_MANAGER > ROLE_OUTLET_MANAGER
+                ROLE_OUTLET_MANAGER > ROLE_USER
+            </value>
+        </property>
+    </bean>
 
 </beans>

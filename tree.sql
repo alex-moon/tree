@@ -201,9 +201,10 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY authorities (username, authority) FROM stdin;
-moona	ROLE_USER
+moona	ROLE_REGION_MANAGER
+area-m	ROLE_AREA_MANAGER
+outlet-m	ROLE_OUTLET_MANAGER
 admin	ROLE_ADMIN
-admin	ROLE_USER
 \.
 
 
@@ -259,6 +260,8 @@ COPY persistent_logins (username, series, token, last_used) FROM stdin;
 
 COPY users (id, username, password, email, enabled) FROM stdin;
 4	moona	fuck	alex.moon@tangentsnowball.com	t
+6	area-m	fuck	area.manager@tangentsnowball.com	t
+7	outlet-m	fuck	outlet.manager@tangentsnowball.com	t
 5	admin	admin	admin@admin.com	t
 \.
 
@@ -267,7 +270,7 @@ COPY users (id, username, password, email, enabled) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('users_id_seq', 5, true);
+SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
