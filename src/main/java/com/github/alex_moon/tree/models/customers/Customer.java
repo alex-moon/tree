@@ -22,7 +22,7 @@ public class Customer {
     
     @Column(name="name")
     private String name;
-    
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="manager_user_id")
     private User manager;

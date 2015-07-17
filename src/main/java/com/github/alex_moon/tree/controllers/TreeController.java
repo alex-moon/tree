@@ -26,7 +26,7 @@ public class TreeController {
     public ModelAndView customers(Principal principal) {
         ModelAndView model = new ModelAndView("customers");
         User manager = userDao.getByUsername(principal.getName());
-        model.addObject("customers", customerDao.allocatedTo(manager));
+        model.addObject("customers", customerDao.getAllUnder(manager));
         return model;
     }
 }

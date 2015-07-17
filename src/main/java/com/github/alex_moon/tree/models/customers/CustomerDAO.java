@@ -17,7 +17,7 @@ public class CustomerDAO implements ICustomerDAO {
     }
  
     @Transactional
-    public List<Customer> allocatedTo(User manager) {
+    public List<Customer> getAllAllocatedTo(User manager) {
         @SuppressWarnings("unchecked")
         List<Customer> customers = (List<Customer>) sessionFactory.getCurrentSession()
                 .createCriteria(Customer.class)
@@ -26,9 +26,15 @@ public class CustomerDAO implements ICustomerDAO {
  
         return customers;
     }
-    
-    public List<Customer> allUnder(User manager) {
-        // @todo stub
-        return allocatedTo(manager);
+
+    @Transactional
+    public List<Customer> getAllUnder(User manager) {
+        List<Customer> customers = getAllAllocatedTo(manager);
+        for (User minion : manager.getMinions()) {
+            for (Customer customer : getAllUnder(minion)) {
+                customers.add(customer);
+            }
+        }
+        return customers;
     }
 }

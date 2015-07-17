@@ -5,6 +5,6 @@ import java.util.List;
 import com.github.alex_moon.tree.models.users.User;
 
 public interface ICustomerDAO {
-    public List<Customer> allocatedTo(User manager);
-    public List<Customer> allUnder(User manager);
+    public List<Customer> getAllAllocatedTo(User manager);
+    public List<Customer> getAllUnder(User manager);
 }
