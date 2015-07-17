@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models;
+package com.github.alex_moon.tree.models.users;
 
 import java.util.List;
 

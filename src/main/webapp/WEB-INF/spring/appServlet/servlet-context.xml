@@ -22,8 +22,6 @@
         <property name="exposeRequestAttributes" value="true" />
     </bean>
 
-    <!--bean id="resourceResolver" class="org.springframework.web.servlet.resource.PathResourceResolver" /-->
-
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:hibernate.cfg.xml" />
@@ -34,7 +32,13 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <bean id="userDao" class="com.github.alex_moon.tree.models.UserDAO">
+    <bean id="userDao" class="com.github.alex_moon.tree.models.users.UserDAO">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="customerDao" class="com.github.alex_moon.tree.models.customers.CustomerDAO">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

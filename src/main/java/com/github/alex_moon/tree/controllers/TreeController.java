@@ -5,12 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.alex_moon.tree.models.IUserDAO;
+import com.github.alex_moon.tree.models.customers.ICustomerDAO;
+import com.github.alex_moon.tree.models.users.IUserDAO;
 
 @Controller
 public class TreeController {
     @Autowired
     private IUserDAO userDao;
+
+    @Autowired
+    private ICustomerDAO customerDao;
 
     @RequestMapping(value="/")
     public String home() { return "home"; }
@@ -18,7 +22,7 @@ public class TreeController {
     @RequestMapping(value="/customers/")
     public ModelAndView customers() {
         ModelAndView model = new ModelAndView("customers");
-        model.addObject("customers", userDao.list());
+        model.addObject("customers", customerDao.list());
         return model;
     }
 }
