@@ -2,21 +2,23 @@
     <h2>Login</h2>
     <form id="form" method="POST">
         <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
-        {{# if err }}
+        {{# if error }}
             <div>Something went wrong lol</div>
         {{/ if }}
-        {{# if out }}
+        {{# if logout }}
             <div>You've logged out successfully.</div>
         {{/ if }}
         {{# if time }}
             <div>You've been logged out due to inactivity.</div>
         {{/ if }}
 
-        <div>
-            <label>Username: <input type="text" name="username" value=""/></label>
+        <div class="controls">
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username" value=""/>
         </div>
-        <div>
-            <label>Password: <input type="password" name="password" value=""/></label>
+        <div class="controls">
+            <label for="password">Password: </label>
+            <input type="password" name="password" id="password" value=""/>
         </div>
          
         <input value="Login" name="submit" type="submit"/>

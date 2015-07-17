@@ -25,6 +25,40 @@ h1 {
     position: relative;
 }
 
+#content form {
+    margin: 10px 0;
+}
+
+#content div.controls {
+    margin: 2px 0;
+}
+
+#content form label {
+    width: 100px;
+    display: block;
+    float: left;
+}
+
+#content input[type="submit"] {
+    clear: both;
+    margin: 10px 0;
+}
+
+#footer {
+    border: solid 1px black;
+    background: #eee;
+    width: 800px;
+    margin: 20px auto;
+    padding: 5px 15px;
+    position: relative;
+    text-align: center;
+}
+
+#footer form {
+    width: 300px;
+    margin: 20px auto;
+}
+
 h2 {
     margin: 5px 0;
 }

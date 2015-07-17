@@ -9,5 +9,16 @@
     {{# block "content" }}
     {{/ block}}
 </div>
+<div id="footer">
+    <p>A bit of a muckabout by <a href="https://github.com/alex-moon">Alex Moon</a> &mdash; <a href="https://github.com/alex-moon/tree">Fork it!</a></p>
+    {{# if user }}
+        <form method="post" action="/tree/logout">
+            <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
+            <input type="submit" value="Logout" />
+        </form>
+    {{ else }}
+        <p>Login to start.</p>
+    {{/ if }}
+</div>
 </body>
 </html>

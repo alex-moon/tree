@@ -16,6 +16,10 @@
     <mvc:resources mapping="/static/**" location="/static-resources/" />
     <mvc:annotation-driven />
 
+    <mvc:interceptors>
+        <bean class="com.github.alex_moon.tree.controllers.TreeInterceptor" />
+    </mvc:interceptors>
+
     <bean id="viewResolver" class="com.github.jknack.handlebars.springmvc.HandlebarsViewResolver">
         <property name="prefix" value="/WEB-INF/handlebars/" />
         <property name="suffix" value=".html" />

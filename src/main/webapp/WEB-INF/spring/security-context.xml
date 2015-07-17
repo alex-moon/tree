@@ -10,13 +10,10 @@
     <security:http auto-config="true" use-expressions="true" access-decision-manager-ref="accessDecisionManager">
         <!-- Restrict URLs based on role -->
         <security:intercept-url pattern="/login*" access="permitAll" />
-        
+        <security:intercept-url pattern="/logout*" access="permitAll" />
         <security:intercept-url pattern="/static/**" access="permitAll" />
-
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-
         <security:intercept-url pattern="/customers/**" access="hasRole('ROLE_OUTLET_MANAGER')" />
-
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
         <!-- Override default login and logout pages -->
@@ -24,7 +21,7 @@
                              login-processing-url="/login"
                              default-target-url="/"
                              authentication-failure-url="/login" />
-        <security:logout logout-url="/logout" logout-success-url="/login" />
+        <security:logout logout-url="/logout" logout-success-url="/" />
     </security:http>
 
     <security:authentication-manager>
