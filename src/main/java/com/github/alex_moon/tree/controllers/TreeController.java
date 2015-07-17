@@ -17,8 +17,8 @@ public class TreeController {
 
     @RequestMapping(value="/customers/")
     public ModelAndView customers() {
-        ModelAndView model = new ModelAndView("home");
-        model.addObject("userList", userDao.list());
+        ModelAndView model = new ModelAndView("customers");
+        model.addObject("customers", userDao.list());
         return model;
     }
 }
