@@ -13,9 +13,12 @@ public class TreeController {
     private IUserDAO userDao;
 
     @RequestMapping(value="/")
-    public ModelAndView home() {
+    public String home() { return "home"; }
+
+    @RequestMapping(value="/customers/")
+    public ModelAndView customers() {
         ModelAndView model = new ModelAndView("home");
         model.addObject("userList", userDao.list());
         return model;
-    }     
+    }
 }

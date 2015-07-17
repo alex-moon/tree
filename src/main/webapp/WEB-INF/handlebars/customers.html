@@ -1,0 +1,8 @@
+{{# partial "content" }}
+    <h2>Your Customers</h2>
+    <ul>{{# customers }}
+        <li>{{ name }} ({{ totalSpend }})</li>
+    {{/ customers }}</ul>
+{{/ partial }}
+
+{{> base }}

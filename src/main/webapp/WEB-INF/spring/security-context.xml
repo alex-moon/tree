@@ -31,7 +31,11 @@
 
     <security:authentication-manager>
         <security:authentication-provider >
-            <security:jdbc-user-service data-source-ref="dataSource" />
+            <security:jdbc-user-service data-source-ref="dataSource" authorities-by-username-query="
+                SELECT username AS USERNAME, authority AS ROLE
+                FROM users JOIN user_types ON user_types.id = user_type_id
+                WHERE username = ?
+            " />
         </security:authentication-provider>
     </security:authentication-manager>
 
