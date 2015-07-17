@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface IUserDAO {
     public List<User> list();
+    public User getByUsername(String username);
 }

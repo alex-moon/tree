@@ -1,8 +1,10 @@
 {{# partial "content" }}
     <h2>Your Customers</h2>
-    <ul>{{# customers }}
-        <li>{{ this }}</li>
-    {{/ customers }}</ul>
+    <ul>
+        {{# customers }}
+            <li>{{ this }}</li>
+        {{/ customers }}
+    </ul>
 {{/ partial }}
 
 {{> base }}

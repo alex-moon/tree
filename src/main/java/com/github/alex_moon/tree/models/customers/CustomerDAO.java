@@ -4,23 +4,31 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.github.alex_moon.tree.models.users.User;
 
 public class CustomerDAO implements ICustomerDAO {
     private SessionFactory sessionFactory;
-    
-    // @todo reflection-based property injection :)
+
     public CustomerDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
  
     @Transactional
-    public List<Customer> list() {
+    public List<Customer> allocatedTo(User manager) {
         @SuppressWarnings("unchecked")
-        List<Customer> listCustomer = (List<Customer>) sessionFactory.getCurrentSession()
+        List<Customer> customers = (List<Customer>) sessionFactory.getCurrentSession()
                 .createCriteria(Customer.class)
+                .add(Restrictions.eq("manager", manager))
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
  
-        return listCustomer;
+        return customers;
+    }
+    
+    public List<Customer> allUnder(User manager) {
+        // @todo stub
+        return allocatedTo(manager);
     }
 }
