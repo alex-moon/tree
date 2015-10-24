@@ -29,4 +29,12 @@ public class TreeController {
         model.addObject("customers", customerDao.getAllUnder(manager));
         return model;
     }
+
+    @RequestMapping(value="/spend/")
+    public ModelAndView spend(Principal principal) {
+        ModelAndView model = new ModelAndView("customers");
+        User manager = userDao.getByUsername(principal.getName());
+        model.addObject("customers", customerDao.getAllUnder(manager));
+        return model;
+    }
 }

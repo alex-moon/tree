@@ -14,6 +14,7 @@
         <security:intercept-url pattern="/static/**" access="permitAll" />
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern="/customers/**" access="hasRole('ROLE_OUTLET_MANAGER')" />
+        <security:intercept-url pattern="/spend/**" access="hasRole('ROLE_SPEND_USER')" />
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
         <!-- Override default login and logout pages -->
@@ -43,7 +44,8 @@
                 ROLE_ADMIN > ROLE_REGION_MANAGER
                 ROLE_REGION_MANAGER > ROLE_AREA_MANAGER
                 ROLE_AREA_MANAGER > ROLE_OUTLET_MANAGER
-                ROLE_OUTLET_MANAGER > ROLE_USER
+                ROLE_OUTLET_MANAGER > ROLE_USER, ROLE_SPEND_USER
+                ROLE_CUSTOMER > ROLE_USER, ROLE_SPEND_USER
             </value>
         </property>
     </bean>

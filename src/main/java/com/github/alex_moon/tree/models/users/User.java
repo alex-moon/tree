@@ -13,10 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name="users")
 public class User {
+    private static final int USER_TYPE_UNASSIGNED = 1;
+    private static final int USER_TYPE_BRANCH_MANAGER = 2;
+    private static final int USER_TYPE_REGIONAL_MANAGER = 3;
+    private static final int USER_TYPE_NATIONAL_MANAGER = 4;
+    private static final int USER_TYPE_SUPERUSER = 5;
+    private static final int USER_TYPE_CUSTOMER = 6;
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -38,7 +44,8 @@ public class User {
     @OneToMany(fetch=FetchType.EAGER, mappedBy="manager")
     private Set<User> minions;
 
-    // @todo user type would be nice...
+    @Column(name="user_type_id")
+    private int userTypeId;
 
     public Set<User> getMinions() {
         return minions;
@@ -83,5 +90,11 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public boolean isBranchManager() {
+        return userTypeId == USER_TYPE_BRANCH_MANAGER;
+    }
+    public boolean isCustomer() {
+        return userTypeId == USER_TYPE_CUSTOMER;
     }
 }

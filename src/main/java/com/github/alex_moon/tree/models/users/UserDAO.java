@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class UserDAO implements IUserDAO {
     private SessionFactory sessionFactory;
-    
-    // @todo reflection-based property injection :)
+
     public UserDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

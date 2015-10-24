@@ -7,15 +7,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.alex_moon.tree.models.BaseDAO;
 import com.github.alex_moon.tree.models.users.User;
 
-public class CustomerDAO implements ICustomerDAO {
-    private SessionFactory sessionFactory;
+public class CustomerDAO extends BaseDAO implements ICustomerDAO {
+    public CustomerDAO(SessionFactory sessionFactory) { super(sessionFactory); }
 
-    public CustomerDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
- 
     @Transactional
     public List<Customer> getAllAllocatedTo(User manager) {
         @SuppressWarnings("unchecked")

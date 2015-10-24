@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.customers;
+package com.github.alex_moon.tree.models.spend;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +12,10 @@ import javax.persistence.Table;
 
 import com.github.alex_moon.tree.models.users.User;
 
+
 @Entity
-@Table(name="customers")
-public class Customer {
+@Table(name="spend")
+public class Spend {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -23,29 +24,45 @@ public class Customer {
     @Column(name="name")
     private String name;
 
+    @Column(name="postcode")
+    private String postcode;
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
 
     public String toString() {
-        return String.format("%s (%s)", name, user);
+        return String.format("%s %s", name, postcode);
     }
-    
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
