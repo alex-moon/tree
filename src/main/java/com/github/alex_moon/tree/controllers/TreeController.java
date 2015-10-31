@@ -24,9 +24,19 @@ public class TreeController {
 
     @RequestMapping(value="/spend/")
     public ModelAndView spend(Principal principal) {
-        ModelAndView model = new ModelAndView("spend");
         User user = userDao.getByUsername(principal.getName());
+        String template = getSpendTemplateForUser(user);
+        ModelAndView model = new ModelAndView(template);
         model.addObject("spend", spendService.getForUser(user));
         return model;
+    }
+    
+    private String getSpendTemplateForUser(User user) {
+        if (user.isBranchManager()) {
+            return "branch-spend";
+        } else if (user.isCustomer()) {
+            return "customer-spend";
+        }
+        return "spend";
     }
 }
