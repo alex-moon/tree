@@ -7,10 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
-public class UserDAO implements IUserDAO {
+public class UserDao implements IUserDao {
     private SessionFactory sessionFactory;
 
-    public UserDAO(SessionFactory sessionFactory) {
+    public UserDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
  

@@ -8,23 +8,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.alex_moon.tree.models.BaseDAO;
+import com.github.alex_moon.tree.models.BaseDao;
 import com.github.alex_moon.tree.models.branches.Branch;
 import com.github.alex_moon.tree.models.customers.Customer;
 import com.github.alex_moon.tree.models.users.User;
 
-public class SpendDAO extends BaseDAO implements ISpendDAO { 
-    public SpendDAO(SessionFactory sessionFactory) { super(sessionFactory); }
-
-    @Transactional
-    public List<Spend> getForUser(User user) {
-        if (user.isBranchManager()) {
-            // return getForBranch(getBranchByUser(user));
-        } else if (user.isCustomer()) {
-            // return getForCustomer(getCustomerByUser(user));
-        }
-        return new ArrayList<Spend>();
-    }
+public class SpendDao extends BaseDao implements ISpendDao { 
+    public SpendDao(SessionFactory sessionFactory) { super(sessionFactory); }
 
     public List<Spend> getForCustomer(Customer customer) {
         @SuppressWarnings("unchecked")
