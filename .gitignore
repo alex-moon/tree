@@ -1,4 +1,5 @@
 *.class
+*~
 
 .project
 .settings
@@ -6,3 +7,4 @@
 /target/
 .classpath
 
+notes.txt
