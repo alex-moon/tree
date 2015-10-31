@@ -9,6 +9,7 @@
 
     <mapping class="com.github.alex_moon.tree.models.users.User" />
     <mapping class="com.github.alex_moon.tree.models.customers.Customer" />
+    <mapping class="com.github.alex_moon.tree.models.branches.Branch" />
     <mapping class="com.github.alex_moon.tree.models.spend.Spend" />
   </session-factory>
 </hibernate-configuration>

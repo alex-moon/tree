@@ -44,8 +44,9 @@
                 ROLE_ADMIN > ROLE_REGION_MANAGER
                 ROLE_REGION_MANAGER > ROLE_AREA_MANAGER
                 ROLE_AREA_MANAGER > ROLE_OUTLET_MANAGER
-                ROLE_OUTLET_MANAGER > ROLE_USER, ROLE_SPEND_USER
-                ROLE_CUSTOMER > ROLE_USER, ROLE_SPEND_USER
+                ROLE_OUTLET_MANAGER > ROLE_SPEND_USER
+                ROLE_CUSTOMER > ROLE_SPEND_USER
+                ROLE_SPEND_USER > ROLE_USER
             </value>
         </property>
     </bean>

@@ -1,5 +1,8 @@
 package com.github.alex_moon.tree.models.spend;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.github.alex_moon.tree.models.users.User;
+import com.github.alex_moon.tree.models.branches.Branch;
+import com.github.alex_moon.tree.models.customers.Customer;
 
 
 @Entity
@@ -20,19 +24,29 @@ public class Spend {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
-    
-    @Column(name="name")
-    private String name;
-
-    @Column(name="postcode")
-    private String postcode;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="customer_id")
+    private Customer customer;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="branch_id")
+    private Branch branch;
+
+    @Column(name="spend_date")
+    private Date spendDate;
+
+    @Column(name="spend_value")
+    private BigDecimal spendValue;
+
+    @Column(name="description")
+    private String description;
 
     public String toString() {
-        return String.format("%s %s", name, postcode);
+        return String.format(
+            "%s (£%s from %s to %s at %s)",
+            description, spendValue, customer, branch, spendDate
+        );
     }
 
     public int getId() {
@@ -43,27 +57,43 @@ public class Spend {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getPostcode() {
-        return postcode;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
-    public User getUser() {
-        return user;
+    public Date getSpendDate() {
+        return spendDate;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSpendDate(Date spendDate) {
+        this.spendDate = spendDate;
+    }
+
+    public BigDecimal getSpendValue() {
+        return spendValue;
+    }
+
+    public void setSpendValue(BigDecimal spendValue) {
+        this.spendValue = spendValue;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

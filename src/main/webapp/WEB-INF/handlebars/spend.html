@@ -1,10 +1,23 @@
 {{# partial "content" }}
     <h2>Your Statement</h2>
-    <ul>
+    {{# if spend }}
+    <table class="table-striped table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Branch</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
         {{# spend }}
-            <li>{{ this }}</li>
+            <tr>
+                <td>{{ spendDate }}</td>
+                <td>{{ branch }}</td>
+                <td>&pound;{{ spendValue }}</td>
+                <td>{{ description }}</td>
+            </tr>
         {{/ spend }}
-    </ul>
+    </table>
+    {{/ if }}
 {{/ partial }}
 
 {{> base }}

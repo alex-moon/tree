@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS customer_spend;
+DROP TABLE IF EXISTS spend;
 DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS branches;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS user_types;
 DROP TABLE IF EXISTS persistent_logins;
@@ -7,6 +8,10 @@ DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS group_members;
 DROP TABLE IF EXISTS group_authorities;
 
+
+-- ------------------------------------------------------------------
+-- AUTH
+-- ------------------------------------------------------------------
 CREATE TABLE group_authorities (
     group_id bigint NOT NULL,
     authority text NOT NULL
@@ -45,6 +50,10 @@ INSERT INTO user_types VALUES
 -- customers
 (6, 'Customer', 'ROLE_CUSTOMER');
 
+
+-- ------------------------------------------------------------------
+-- USERS
+-- ------------------------------------------------------------------
 CREATE TABLE users (
     id bigserial primary key,
     username text NOT NULL,
@@ -57,19 +66,26 @@ CREATE TABLE users (
 
 INSERT INTO users VALUES
 (6, 'admin', 'password', 'admin@tree.com', true, 5, null),
+-- managers
 (5, 'regional', 'password', 'regional@tree.com', true, 4, null),
 (4, 'area', 'password', 'area@tree.com', true, 3, 5),
+-- branches
 (3, 'maxi', 'password', 'maxi@tree.com', true, 2, 4),
 (2, 'mini', 'password', 'mini@tree.com', true, 2, 4),
+-- unknown
 (1, 'user', 'password', 'user@tree.com', true, 1, null),
 -- customers
 (7, 'alex', 'password', 'alex@tree.com', true, 6, null),
 (8, 'joe', 'password', 'joe@tree.com', true, 6, null);
 
+
+-- ------------------------------------------------------------------
+-- CUSTOMERS
+-- ------------------------------------------------------------------
 CREATE TABLE customers (
     id bigserial primary key,
     user_id int NULL REFERENCES users (id),
-    name text NOT NULL
+    name text NULL
 );
 
 INSERT INTO customers VALUES
@@ -77,6 +93,10 @@ INSERT INTO customers VALUES
 (2, 8, 'Joe Faquechitte'),
 (3, null, null);
 
+
+-- ------------------------------------------------------------------
+-- BRANCHES
+-- ------------------------------------------------------------------
 CREATE TABLE branches (
     id bigserial PRIMARY KEY,
     user_id bigint NOT NULL REFERENCES users (id),
@@ -84,19 +104,28 @@ CREATE TABLE branches (
     postcode text NOT NULL
 );
 
+INSERT INTO branches VALUES
+(1, 3, 'Maxi Branch', 'N4 1LS'),
+(2, 2, 'Mini Branch', 'NE3 1AT');
+
+
+-- ------------------------------------------------------------------
+-- SPEND
+-- ------------------------------------------------------------------
 CREATE TABLE spend (
+    id bigserial NOT NULL PRIMARY KEY,
     customer_id bigint NOT NULL REFERENCES customers (id),
     branch_id bigint NOT NULL REFERENCES branches (id),
-    spend_date date NOT NULL,
+    spend_date timestamp NOT NULL,
     spend_value decimal (9, 2),
     description TEXT NOT NULL
 );
 
 INSERT INTO spend VALUES
-(1, 3, '2015-07-08', 42.69, 'Beer'),
-(1, 3, '2015-07-10', 12.34, 'Wine'),
-(1, 2, '2015-07-12', 7.99, 'Spirits'),
-(2, 3, '2015-07-14', 23.50, 'Tarpaulin'),
-(2, 3, '2015-07-16', 12.99, 'Stain Remover'),
-(2, 2, '2015-07-18', 69.42, 'Shovel'),
-(3, 2, '2015-10-01', 1.23, 'Bread');
+(1, 1, 1, '2015-07-08 12:34', 42.69, 'Beer'),
+(2, 1, 1, '2015-07-10 23:45', 12.34, 'Wine'),
+(3, 1, 2, '2015-07-12 01:23', 7.99, 'Spirits'),
+(4, 2, 1, '2015-07-14 21:09', 23.50, 'Tarpaulin'),
+(5, 2, 1, '2015-07-16 10:01', 12.99, 'Stain Remover'),
+(6, 2, 2, '2015-07-18 00:42', 69.42, 'Shovel'),
+(7, 3, 2, '2015-10-01 11:11', 1.23, 'Bread');

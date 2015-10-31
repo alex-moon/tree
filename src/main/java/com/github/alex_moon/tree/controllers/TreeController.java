@@ -24,7 +24,7 @@ public class TreeController {
 
     @RequestMapping(value="/spend/")
     public ModelAndView spend(Principal principal) {
-        ModelAndView model = new ModelAndView("customers");
+        ModelAndView model = new ModelAndView("spend");
         User user = userDao.getByUsername(principal.getName());
         model.addObject("spend", spendService.getForUser(user));
         return model;
