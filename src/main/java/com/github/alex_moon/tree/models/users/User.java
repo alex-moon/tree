@@ -1,27 +1,21 @@
 package com.github.alex_moon.tree.models.users;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
 public class User {
-    private static final int USER_TYPE_UNASSIGNED = 1;
-    private static final int USER_TYPE_BRANCH_MANAGER = 2;
-    private static final int USER_TYPE_REGIONAL_MANAGER = 3;
-    private static final int USER_TYPE_NATIONAL_MANAGER = 4;
-    private static final int USER_TYPE_SUPERUSER = 5;
-    private static final int USER_TYPE_CUSTOMER = 6;
+    public static final int USER_TYPE_UNASSIGNED = 1;
+    public static final int USER_TYPE_BRANCH_MANAGER = 2;
+    public static final int USER_TYPE_REGIONAL_MANAGER = 3;
+    public static final int USER_TYPE_NATIONAL_MANAGER = 4;
+    public static final int USER_TYPE_SUPERUSER = 5;
+    public static final int USER_TYPE_CUSTOMER = 6;
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,31 +31,8 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="manager_user_id")
-    private User manager;
-
-    @OneToMany(fetch=FetchType.EAGER, mappedBy="manager")
-    private Set<User> minions;
-
     @Column(name="user_type_id")
     private int userTypeId;
-
-    public Set<User> getMinions() {
-        return minions;
-    }
-
-    public void setMinions(Set<User> minions) {
-        this.minions = minions;
-    }
-
-    public User getManager() {
-        return manager;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
-    }
 
     public String toString() {
         return String.format("%s <%s>", username, email);
@@ -91,6 +62,20 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    public int getUserTypeId() {
+        return userTypeId;
+    }
+    public void setUserTypeId(int userTypeId) {
+        this.userTypeId = userTypeId;
+    }
+    
+    public void setUserTypeBranchManager() {
+        this.userTypeId = USER_TYPE_BRANCH_MANAGER;
+    }
+    public void setUserTypeCustomer() {
+        this.userTypeId = USER_TYPE_CUSTOMER;
+    }
+
     public boolean isBranchManager() {
         return userTypeId == USER_TYPE_BRANCH_MANAGER;
     }

@@ -60,23 +60,22 @@ CREATE TABLE users (
     password text NOT NULL,
     email text NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
-    user_type_id int NOT NULL DEFAULT 1 REFERENCES user_types (id),
-    manager_user_id int DEFAULT NULL REFERENCES users (id)
+    user_type_id int NOT NULL DEFAULT 1 REFERENCES user_types (id)
 );
 
 INSERT INTO users VALUES
-(6, 'admin', 'password', 'admin@tree.com', true, 5, null),
+(6, 'admin', 'password', 'admin@tree.com', true, 5),
 -- managers
-(5, 'regional', 'password', 'regional@tree.com', true, 4, null),
-(4, 'area', 'password', 'area@tree.com', true, 3, 5),
+(5, 'regional', 'password', 'regional@tree.com', true, 4),
+(4, 'area', 'password', 'area@tree.com', true, 3),
 -- branches
-(3, 'maxi', 'password', 'maxi@tree.com', true, 2, 4),
-(2, 'mini', 'password', 'mini@tree.com', true, 2, 4),
+(3, 'maxi', 'password', 'maxi@tree.com', true, 2),
+(2, 'mini', 'password', 'mini@tree.com', true, 2),
 -- unknown
-(1, 'user', 'password', 'user@tree.com', true, 1, null),
+(1, 'user', 'password', 'user@tree.com', true, 1),
 -- customers
-(7, 'alex', 'password', 'alex@tree.com', true, 6, null),
-(8, 'joe', 'password', 'joe@tree.com', true, 6, null);
+(7, 'alex', 'password', 'alex@tree.com', true, 6),
+(8, 'joe', 'password', 'joe@tree.com', true, 6);
 
 
 -- ------------------------------------------------------------------
@@ -85,13 +84,13 @@ INSERT INTO users VALUES
 CREATE TABLE customers (
     id bigserial primary key,
     user_id int NULL REFERENCES users (id),
-    name text NULL
+    name text NOT NULL,
+    barcode text NOT NULL UNIQUE
 );
 
 INSERT INTO customers VALUES
-(1, 7, 'Alex Moon'),
-(2, 8, 'Joe Faquechitte'),
-(3, null, null);
+(1, 7, 'Alex Moon', 'TR000001'),
+(2, 8, 'Joe Faquechitte', 'TR000002');
 
 
 -- ------------------------------------------------------------------
@@ -127,5 +126,4 @@ INSERT INTO spend VALUES
 (3, 1, 2, '2015-07-12 01:23', 7.99, 'Spirits'),
 (4, 2, 1, '2015-07-14 21:09', 23.50, 'Tarpaulin'),
 (5, 2, 1, '2015-07-16 10:01', 12.99, 'Stain Remover'),
-(6, 2, 2, '2015-07-18 00:42', 69.42, 'Shovel'),
-(7, 3, 2, '2015-10-01 11:11', 1.23, 'Bread');
+(6, 2, 2, '2015-07-18 00:42', 69.42, 'Shovel');

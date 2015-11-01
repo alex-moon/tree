@@ -27,6 +27,9 @@ public class Customer {
     @JoinColumn(name="user_id")
     private User user;
 
+    @Column(name="barcode")
+    private String barcode;
+
     public String toString() {
         return String.format("%s (%s)", name, user);
     }
@@ -48,5 +51,11 @@ public class Customer {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getBarcode() {
+        return barcode;
+    }
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

@@ -5,16 +5,15 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.transaction.annotation.Transactional;
 
-public class UserDao implements IUserDao {
-    private SessionFactory sessionFactory;
+import com.github.alex_moon.tree.models.BaseDao;
 
+public class UserDao extends BaseDao<User> implements IUserDao {
     public UserDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        super(sessionFactory);
+        model = User.class;
     }
- 
-    @Transactional
+
     public List<User> list() {
         @SuppressWarnings("unchecked")
         List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
@@ -24,8 +23,7 @@ public class UserDao implements IUserDao {
  
         return listUser;
     }
-    
-    @Transactional
+
     public User getByUsername(String username) {
         User user = (User) sessionFactory.getCurrentSession()
             .createCriteria(User.class)

@@ -6,8 +6,11 @@ import org.hibernate.criterion.Restrictions;
 import com.github.alex_moon.tree.models.BaseDao;
 import com.github.alex_moon.tree.models.users.User;
 
-public class CustomerDao extends BaseDao implements ICustomerDao {
-    public CustomerDao(SessionFactory sessionFactory) { super(sessionFactory); }
+public class CustomerDao extends BaseDao<Customer> implements ICustomerDao {
+    public CustomerDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+        model = Customer.class;
+    }
 
     public Customer getForUser(User user) {
         Customer customer = (Customer) sessionFactory.getCurrentSession()
