@@ -31,7 +31,7 @@ public class ApiController {
     }
 
     @RequestMapping(value="/branches", method=RequestMethod.POST)
-    public ResponseEntity<Branch> createBranch(@RequestBody CreateBranch request) 
+    public ResponseEntity<Branch> createBranch(@RequestBody CreateBranch request) {
         Branch branch = branchService.createBranch(request);
         return new ResponseEntity<Branch>(branch, HttpStatus.OK);
     }

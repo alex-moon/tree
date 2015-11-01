@@ -1,25 +1,27 @@
-package com.github.alex_moon.tree.controllers;
+package com.github.alex_moon.tree;
 
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TreeInterceptor extends HandlerInterceptorAdapter {
+
     @Override
     public boolean preHandle(
         HttpServletRequest request,
         HttpServletResponse response,
         Object handler
     ) throws Exception {
-        String apiKey = request.getHeader("X-Api-Key");
-        // @todo pull it from the DB might be nice
-        if (apiKey == null || !apiKey.toString().equals("123")) {
-            response.setStatus(403);
-            return false;
+        if (ApiHelper.isApiRequest(request)) {
+            if (!ApiHelper.isValidApiRequest(request)) {
+                response.setStatus(403);
+                return false;
+            }
         }
         return super.preHandle(request, response, handler);
     }
