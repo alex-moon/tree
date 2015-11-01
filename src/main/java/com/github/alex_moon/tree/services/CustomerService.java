@@ -38,6 +38,6 @@ public class CustomerService {
     }
 
     private String generateBarcode() {
-        return "TR" + RandomStringUtils.randomNumeric(6);
+        return String.format("TR%sEE", RandomStringUtils.randomNumeric(6));
     }
 }

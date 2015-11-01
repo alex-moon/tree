@@ -36,25 +36,25 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <bean id="userDao" class="com.github.alex_moon.tree.models.users.UserDao">
+    <bean id="userDao" class="com.github.alex_moon.tree.models.UserDao">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
 
-    <bean id="customerDao" class="com.github.alex_moon.tree.models.customers.CustomerDao">
+    <bean id="customerDao" class="com.github.alex_moon.tree.models.CustomerDao">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
 
-    <bean id="branchDao" class="com.github.alex_moon.tree.models.branches.BranchDao">
+    <bean id="branchDao" class="com.github.alex_moon.tree.models.BranchDao">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
 
-    <bean id="spendDao" class="com.github.alex_moon.tree.models.spend.SpendDao">
+    <bean id="spendDao" class="com.github.alex_moon.tree.models.SpendDao">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

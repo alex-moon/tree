@@ -89,8 +89,8 @@ CREATE TABLE customers (
 );
 
 INSERT INTO customers VALUES
-(1, 7, 'Alex Moon', 'TR000001'),
-(2, 8, 'Joe Faquechitte', 'TR000002');
+(1, 7, 'Alex Moon', 'TR123456EE'),
+(2, 8, 'Joe Faquechitte', 'TR654321EE');
 
 
 -- ------------------------------------------------------------------
@@ -127,3 +127,13 @@ INSERT INTO spend VALUES
 (4, 2, 1, '2015-07-14 21:09', 23.50, 'Tarpaulin'),
 (5, 2, 1, '2015-07-16 10:01', 12.99, 'Stain Remover'),
 (6, 2, 2, '2015-07-18 00:42', 69.42, 'Shovel');
+
+
+-- here's some stupid fucking shit because postgresql is fucking elite
+SELECT pg_catalog.setval('branches_id_seq', 10, false);
+SELECT pg_catalog.setval('customers_id_seq', 10, false);
+SELECT pg_catalog.setval('group_members_id_seq', 10, false);
+SELECT pg_catalog.setval('groups_id_seq', 10, false);
+SELECT pg_catalog.setval('spend_id_seq', 10, false);
+SELECT pg_catalog.setval('user_types_id_seq', 10, false);
+SELECT pg_catalog.setval('users_id_seq', 10, true);
