@@ -2,26 +2,16 @@ package com.github.alex_moon.tree.models;
 
 import org.hibernate.SessionFactory;
 
-import com.github.alex_moon.tree.api.requests.CreateRequest;
+import com.github.alex_moon.tree.models.interfaces.IBaseDao;
 
-public class BaseDao<T> implements IBaseDao<T> {
+public class BaseDao implements IBaseDao {
     protected SessionFactory sessionFactory;
-    protected Class<T> model;
 
     public BaseDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    
-    public T create(CreateRequest request) {
-        T object;
-        try {
-            object = model.newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+
+    public void persist(Object object) {
         sessionFactory.getCurrentSession().persist(object);
-        return object;
     }
 }

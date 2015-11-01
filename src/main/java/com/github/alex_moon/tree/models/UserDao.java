@@ -6,9 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
-import com.github.alex_moon.tree.models.BaseDao;
+import com.github.alex_moon.tree.models.interfaces.IUserDao;
 
-public class UserDao extends BaseDao<User> implements IUserDao {
+public class UserDao extends BaseDao implements IUserDao {
     public UserDao(SessionFactory sessionFactory) { super(sessionFactory); }
 
     public List<User> list() {

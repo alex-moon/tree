@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
 import com.github.alex_moon.tree.models.Customer;
+import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
 import com.github.alex_moon.tree.models.interfaces.IUserDao;
-import com.github.alex_moon.tree.models.User;
 
 @Service
 public class CustomerService {
@@ -21,21 +21,22 @@ public class CustomerService {
 
     @Transactional
     public Customer createCustomer(CreateCustomer request) {
-        User user = userDao.create(request);
-        user.setUserTypeCustomer();
-        // @todo move these to create()
+        User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
+        user.setUserTypeCustomer();
 
-        Customer customer = customerDao.create();
+        Customer customer = new Customer();
         customer.setUser(user);
         customer.setName(request.getName());
         customer.setBarcode(generateBarcode());
 
+        userDao.persist(user);
+        customerDao.persist(customer);
         return customer;
     }
-    
+
     private String generateBarcode() {
         return "TR" + RandomStringUtils.randomNumeric(6);
     }
