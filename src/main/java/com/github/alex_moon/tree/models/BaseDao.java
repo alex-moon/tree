@@ -2,6 +2,8 @@ package com.github.alex_moon.tree.models;
 
 import org.hibernate.SessionFactory;
 
+import com.github.alex_moon.tree.api.requests.CreateRequest;
+
 public class BaseDao<T> implements IBaseDao<T> {
     protected SessionFactory sessionFactory;
     protected Class<T> model;
@@ -10,7 +12,7 @@ public class BaseDao<T> implements IBaseDao<T> {
         this.sessionFactory = sessionFactory;
     }
     
-    public T create() {
+    public T create(CreateRequest request) {
         T object;
         try {
             object = model.newInstance();

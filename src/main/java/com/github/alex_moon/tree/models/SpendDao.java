@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.spend;
+package com.github.alex_moon.tree.models;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.github.alex_moon.tree.models.BaseDao;
-import com.github.alex_moon.tree.models.branches.Branch;
-import com.github.alex_moon.tree.models.customers.Customer;
+import com.github.alex_moon.tree.models.Branch;
+import com.github.alex_moon.tree.models.Customer;
 
 public class SpendDao extends BaseDao implements ISpendDao { 
     public SpendDao(SessionFactory sessionFactory) { super(sessionFactory); }

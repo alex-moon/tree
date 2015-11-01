@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.branches;
+package com.github.alex_moon.tree.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.github.alex_moon.tree.models.users.User;
-
+import com.github.alex_moon.tree.models.User;
 
 @Entity
-@Table(name="branches")
-public class Branch {
+@Table(name="customers")
+public class Customer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -24,46 +23,39 @@ public class Branch {
     @Column(name="name")
     private String name;
 
-    @Column(name="postcode")
-    private String postcode;
-
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
 
-    public String toString() {
-        return String.format("%s %s", name, postcode);
-    }
+    @Column(name="barcode")
+    private String barcode;
 
+    public String toString() {
+        return String.format("%s (%s)", name, user);
+    }
+    
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getBarcode() {
+        return barcode;
+    }
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.users;
+package com.github.alex_moon.tree.models;
 
 import java.util.List;
 
@@ -9,10 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import com.github.alex_moon.tree.models.BaseDao;
 
 public class UserDao extends BaseDao<User> implements IUserDao {
-    public UserDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
-        model = User.class;
-    }
+    public UserDao(SessionFactory sessionFactory) { super(sessionFactory); }
 
     public List<User> list() {
         @SuppressWarnings("unchecked")

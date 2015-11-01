@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.alex_moon.tree.models.users.IUserDao;
-import com.github.alex_moon.tree.models.users.User;
+import com.github.alex_moon.tree.models.interfaces.IUserDao;
+import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.SpendService;
 
 @Controller

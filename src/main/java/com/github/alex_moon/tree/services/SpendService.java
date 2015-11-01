@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.alex_moon.tree.models.branches.Branch;
-import com.github.alex_moon.tree.models.branches.IBranchDao;
-import com.github.alex_moon.tree.models.customers.Customer;
-import com.github.alex_moon.tree.models.customers.ICustomerDao;
-import com.github.alex_moon.tree.models.spend.ISpendDao;
-import com.github.alex_moon.tree.models.spend.Spend;
-import com.github.alex_moon.tree.models.users.User;
+import com.github.alex_moon.tree.models.Branch;
+import com.github.alex_moon.tree.models.interfaces.IBranchDao;
+import com.github.alex_moon.tree.models.Customer;
+import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
+import com.github.alex_moon.tree.models.interfaces.ISpendDao;
+import com.github.alex_moon.tree.models.Spend;
+import com.github.alex_moon.tree.models.User;
 
 @Service
 public class SpendService {

@@ -1,11 +1,11 @@
-package com.github.alex_moon.tree.models.branches;
+package com.github.alex_moon.tree.models;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.alex_moon.tree.models.BaseDao;
-import com.github.alex_moon.tree.models.users.User;
+import com.github.alex_moon.tree.models.User;
 
 public class BranchDao extends BaseDao implements IBranchDao { 
     public BranchDao(SessionFactory sessionFactory) { super(sessionFactory); }

@@ -1,10 +1,10 @@
-package com.github.alex_moon.tree.models.customers;
+package com.github.alex_moon.tree.models;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 import com.github.alex_moon.tree.models.BaseDao;
-import com.github.alex_moon.tree.models.users.User;
+import com.github.alex_moon.tree.models.User;
 
 public class CustomerDao extends BaseDao<Customer> implements ICustomerDao {
     public CustomerDao(SessionFactory sessionFactory) {

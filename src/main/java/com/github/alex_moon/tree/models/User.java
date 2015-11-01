@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.users;
+package com.github.alex_moon.tree.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

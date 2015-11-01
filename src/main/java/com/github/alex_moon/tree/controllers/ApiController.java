@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
-import com.github.alex_moon.tree.models.customers.Customer;
+import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.services.CustomerService;
 
 @RestController

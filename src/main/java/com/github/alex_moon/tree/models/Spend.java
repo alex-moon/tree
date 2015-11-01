@@ -1,4 +1,4 @@
-package com.github.alex_moon.tree.models.spend;
+package com.github.alex_moon.tree.models;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.github.alex_moon.tree.models.branches.Branch;
-import com.github.alex_moon.tree.models.customers.Customer;
+import com.github.alex_moon.tree.models.Branch;
+import com.github.alex_moon.tree.models.Customer;
 
 
 @Entity
