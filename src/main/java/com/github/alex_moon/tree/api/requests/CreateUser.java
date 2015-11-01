@@ -1,6 +1,6 @@
 package com.github.alex_moon.tree.api.requests;
 
-public class CreateUser implements CreateRequest {
+public class CreateUser {
     private String username;
     private String password;
     private String email;
