@@ -3,12 +3,15 @@ package com.github.alex_moon.tree.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,10 +51,14 @@ public class ApiController {
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
-    protected ResponseEntity<Response> forbiddenResponse() {
+    protected ResponseEntity<Response> errorResponse(String error, HttpStatus status) {
         Map<String, String> errors = new HashMap<String, String>();
-        errors.put("", "You are not authorised to make this request.");
-        return new ResponseEntity<Response>(new Response(errors), HttpStatus.FORBIDDEN);
+        errors.put("", error);
+        return new ResponseEntity<Response>(new Response(errors), status);
+    }
+
+    protected ResponseEntity<Response> forbiddenResponse() {
+        return errorResponse("You are not authorised to make this request.", HttpStatus.FORBIDDEN);
     }
 
     protected ResponseEntity<Response> successResponse(Model entityResult) {
@@ -93,5 +100,10 @@ public class ApiController {
         }
         Spend spend = spendService.createSpend(request);
         return successResponse(spend);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Response> handleError(HttpServletRequest request, HttpServletResponse response, Exception exception) {
+        return errorResponse(exception.getMessage(), HttpStatus.valueOf(response.getStatus()));
     }
 }

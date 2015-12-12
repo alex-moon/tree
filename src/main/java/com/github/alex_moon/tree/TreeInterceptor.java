@@ -1,5 +1,6 @@
 package com.github.alex_moon.tree;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class TreeInterceptor extends HandlerInterceptorAdapter {
         final HttpServletResponse response,
         final Object handler,
         final ModelAndView modelAndView
-    ) {
+    ) throws IOException {
         if (modelAndView != null) {
             Principal principal = request.getUserPrincipal();
             if (principal != null) {
