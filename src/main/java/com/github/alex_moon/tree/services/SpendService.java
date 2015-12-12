@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.alex_moon.tree.api.requests.CreateSpend;
 import com.github.alex_moon.tree.models.Branch;
-import com.github.alex_moon.tree.models.interfaces.IBranchDao;
 import com.github.alex_moon.tree.models.Customer;
-import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
-import com.github.alex_moon.tree.models.interfaces.ISpendDao;
 import com.github.alex_moon.tree.models.Spend;
 import com.github.alex_moon.tree.models.User;
+import com.github.alex_moon.tree.models.interfaces.IBranchDao;
+import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
+import com.github.alex_moon.tree.models.interfaces.ISpendDao;
 
 @Service
 public class SpendService {
@@ -36,5 +37,10 @@ public class SpendService {
             return spendDao.getForCustomer(customer);
         }
         return new ArrayList<Spend>();
+    }
+
+    @Transactional
+    public Spend createSpend(CreateSpend createSpend) {
+        throw new RuntimeException("cunt a doodle doo bitch");
     }
 }

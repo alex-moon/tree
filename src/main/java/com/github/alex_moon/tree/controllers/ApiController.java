@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.alex_moon.tree.ApiHelper;
 import com.github.alex_moon.tree.api.requests.CreateBranch;
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
+import com.github.alex_moon.tree.api.requests.CreateSpend;
 import com.github.alex_moon.tree.api.responses.Response;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.models.Model;
+import com.github.alex_moon.tree.models.Spend;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.BranchService;
 import com.github.alex_moon.tree.services.CustomerService;
+import com.github.alex_moon.tree.services.SpendService;
 
 @RestController
 @RequestMapping("/api")
@@ -36,6 +39,9 @@ public class ApiController {
 
     @Autowired
     private BranchService branchService;
+
+    @Autowired
+    private SpendService spendService;
 
     protected ResponseEntity<Response> errorResponse(BindingResult bindingResult) {
         Response response = new Response(bindingResult.getFieldErrors());
@@ -78,5 +84,14 @@ public class ApiController {
         }
         Branch branch = branchService.createBranch(request);
         return successResponse(branch);
+    }
+
+    @RequestMapping(value="/spend", method=RequestMethod.POST)
+    public ResponseEntity<Response> createSpend(@RequestBody @Valid CreateSpend request, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return errorResponse(bindingResult);
+        }
+        Spend spend = spendService.createSpend(request);
+        return successResponse(spend);
     }
 }
