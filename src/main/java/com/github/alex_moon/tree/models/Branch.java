@@ -15,7 +15,7 @@ import com.github.alex_moon.tree.models.User;
 
 @Entity
 @Table(name="branches")
-public class Branch {
+public class Branch implements Model {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

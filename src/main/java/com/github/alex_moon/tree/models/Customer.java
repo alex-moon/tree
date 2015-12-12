@@ -14,7 +14,7 @@ import com.github.alex_moon.tree.models.User;
 
 @Entity
 @Table(name="customers")
-public class Customer {
+public class Customer implements Model {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

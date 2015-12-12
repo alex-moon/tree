@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Model {
     public static final int USER_TYPE_UNASSIGNED = 1;
     public static final int USER_TYPE_BRANCH_MANAGER = 2;
     public static final int USER_TYPE_REGIONAL_MANAGER = 3;

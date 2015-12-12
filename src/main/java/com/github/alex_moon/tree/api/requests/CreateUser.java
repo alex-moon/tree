@@ -1,9 +1,18 @@
 package com.github.alex_moon.tree.api.requests;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class CreateUser {
+    @NotEmpty
     private String username;
+
+    @NotEmpty
     private String password;
+
+    @NotEmpty @Email
     private String email;
+
     public String getUsername() {
         return username;
     }

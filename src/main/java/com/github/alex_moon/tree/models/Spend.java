@@ -19,7 +19,7 @@ import com.github.alex_moon.tree.models.Customer;
 
 @Entity
 @Table(name="spend")
-public class Spend {
+public class Spend implements Model {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
