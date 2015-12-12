@@ -60,22 +60,23 @@ CREATE TABLE users (
     password text NOT NULL,
     email text NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
-    user_type_id int NOT NULL DEFAULT 1 REFERENCES user_types (id)
+    user_type_id int NOT NULL DEFAULT 1 REFERENCES user_types (id),
+    api_key text NULL
 );
 
 INSERT INTO users VALUES
-(6, 'admin', 'password', 'admin@tree.com', true, 5),
+(6, 'admin', 'password', 'admin@tree.com', true, 5, 'fuck'),
 -- managers
-(5, 'regional', 'password', 'regional@tree.com', true, 4),
-(4, 'area', 'password', 'area@tree.com', true, 3),
+(5, 'regional', 'password', 'regional@tree.com', true, 4, null),
+(4, 'area', 'password', 'area@tree.com', true, 3, null),
 -- branches
-(3, 'maxi', 'password', 'maxi@tree.com', true, 2),
-(2, 'mini', 'password', 'mini@tree.com', true, 2),
+(3, 'maxi', 'password', 'maxi@tree.com', true, 2, 'CA123456SH'),
+(2, 'mini', 'password', 'mini@tree.com', true, 2, 'CA654321SH'),
 -- unknown
-(1, 'user', 'password', 'user@tree.com', true, 1),
+(1, 'user', 'password', 'user@tree.com', true, 1, null),
 -- customers
-(7, 'alex', 'password', 'alex@tree.com', true, 6),
-(8, 'joe', 'password', 'joe@tree.com', true, 6);
+(7, 'alex', 'password', 'alex@tree.com', true, 6, null),
+(8, 'joe', 'password', 'joe@tree.com', true, 6, null);
 
 
 -- ------------------------------------------------------------------

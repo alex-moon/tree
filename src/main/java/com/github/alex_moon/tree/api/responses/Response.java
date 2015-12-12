@@ -21,6 +21,11 @@ public class Response {
         status = "error";
     }
 
+    public Response(Map<String, String> errors) {
+        this.errors = errors;
+        status = "error";
+    }
+
     public Response(Model result) {
         this.result = result;
         status = "success";

@@ -28,4 +28,12 @@ public class UserDao extends BaseDao implements IUserDao {
             .uniqueResult();
         return user;
     }
+
+    public User getByApiKey(String apiKey) {
+        User user = (User) sessionFactory.getCurrentSession()
+            .createCriteria(User.class)
+            .add(Restrictions.eq("apiKey", apiKey))
+            .uniqueResult();
+        return user;
+    }
 }

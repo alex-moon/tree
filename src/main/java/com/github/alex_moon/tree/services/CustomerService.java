@@ -1,14 +1,10 @@
 package com.github.alex_moon.tree.services;
 
-import javax.validation.Valid;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 
-import com.github.alex_moon.tree.api.ApiException;
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
 import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.models.User;

@@ -34,6 +34,9 @@ public class User implements Model {
     @Column(name="user_type_id")
     private int userTypeId;
 
+    @Column(name="api_key")
+    private String apiKey;
+
     public String toString() {
         return String.format("%s <%s>", username, email);
     }
@@ -76,10 +79,19 @@ public class User implements Model {
         this.userTypeId = USER_TYPE_CUSTOMER;
     }
 
+    public boolean isSuperuser() {
+        return userTypeId == USER_TYPE_SUPERUSER;
+    }
     public boolean isBranchManager() {
         return userTypeId == USER_TYPE_BRANCH_MANAGER;
     }
     public boolean isCustomer() {
         return userTypeId == USER_TYPE_CUSTOMER;
+    }
+    public String getApiKey() {
+        return apiKey;
+    }
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 }

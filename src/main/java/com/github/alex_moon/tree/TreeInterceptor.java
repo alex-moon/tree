@@ -5,11 +5,13 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TreeInterceptor extends HandlerInterceptorAdapter {
+    @Autowired
+    ApiHelper apiHelper;
 
     @Override
     public boolean preHandle(
@@ -18,7 +20,7 @@ public class TreeInterceptor extends HandlerInterceptorAdapter {
         Object handler
     ) throws Exception {
         if (ApiHelper.isApiRequest(request)) {
-            if (!ApiHelper.isValidApiRequest(request)) {
+            if (!apiHelper.isValidApiRequest(request)) {
                 response.setStatus(403);
                 return false;
             }

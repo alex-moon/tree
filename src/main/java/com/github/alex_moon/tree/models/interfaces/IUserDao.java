@@ -7,4 +7,5 @@ import com.github.alex_moon.tree.models.User;
 public interface IUserDao extends IBaseDao {
     public List<User> list();
     public User getByUsername(String username);
+    public User getByApiKey(String apiKey);
 }

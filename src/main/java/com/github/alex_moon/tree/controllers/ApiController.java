@@ -1,5 +1,8 @@
 package com.github.alex_moon.tree.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.alex_moon.tree.ApiHelper;
 import com.github.alex_moon.tree.api.requests.CreateBranch;
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
 import com.github.alex_moon.tree.api.responses.Response;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.models.Model;
+import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.BranchService;
 import com.github.alex_moon.tree.services.CustomerService;
 
@@ -24,22 +29,38 @@ import com.github.alex_moon.tree.services.CustomerService;
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
+    private ApiHelper apiHelper;
+
+    @Autowired
     private CustomerService customerService;
 
     @Autowired
     private BranchService branchService;
-    
+
     protected ResponseEntity<Response> errorResponse(BindingResult bindingResult) {
         Response response = new Response(bindingResult.getFieldErrors());
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
-    
+
+    protected ResponseEntity<Response> forbiddenResponse() {
+        Map<String, String> errors = new HashMap<String, String>();
+        errors.put("", "You are not authorised to make this request.");
+        return new ResponseEntity<Response>(new Response(errors), HttpStatus.FORBIDDEN);
+    }
+
     protected ResponseEntity<Response> successResponse(Model entityResult) {
         return new ResponseEntity<Response>(new Response(entityResult), HttpStatus.OK);
+    }
+    
+    protected User getSessionUser() {
+        return apiHelper.getSessionUser();
     }
 
     @RequestMapping(value="/customers", method=RequestMethod.POST)
     public ResponseEntity<Response> createCustomer(@RequestBody @Valid CreateCustomer request, BindingResult bindingResult) {
+        if (!getSessionUser().isSuperuser()) {
+            return forbiddenResponse();
+        }
         if (bindingResult.hasErrors()) {
             return errorResponse(bindingResult);
         }
@@ -49,6 +70,9 @@ public class ApiController {
 
     @RequestMapping(value="/branches", method=RequestMethod.POST)
     public ResponseEntity<Response> createBranch(@RequestBody @Valid CreateBranch request, BindingResult bindingResult) {
+        if (!getSessionUser().isSuperuser()) {
+            return forbiddenResponse();
+        }
         if (bindingResult.hasErrors()) {
             return errorResponse(bindingResult);
         }
