@@ -16,4 +16,13 @@ public class CustomerDao extends BaseDao implements ICustomerDao {
                 .uniqueResult();
         return customer;
     }
+
+    public Customer getForBarcode(String customerBarcode) {
+        Customer customer = (Customer) sessionFactory.getCurrentSession()
+                .createCriteria(Customer.class)
+                .add(Restrictions.eq("barcode", customerBarcode))
+                .setMaxResults(1)
+                .uniqueResult();
+        return customer;
+    }
 }

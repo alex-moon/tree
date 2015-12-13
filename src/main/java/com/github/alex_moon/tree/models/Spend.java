@@ -36,8 +36,8 @@ public class Spend implements Model {
     @Column(name="spend_date")
     private Date spendDate;
 
-    @Column(name="spend_value")
-    private BigDecimal spendValue;
+    @Column(name="spend_amount")
+    private BigDecimal spendAmount;
 
     @Column(name="description")
     private String description;
@@ -45,7 +45,7 @@ public class Spend implements Model {
     public String toString() {
         return String.format(
             "%s (£%s from %s to %s at %s)",
-            description, spendValue, customer, branch, spendDate
+            description, spendAmount, customer, branch, spendDate
         );
     }
 
@@ -81,12 +81,12 @@ public class Spend implements Model {
         this.spendDate = spendDate;
     }
 
-    public BigDecimal getSpendValue() {
-        return spendValue;
+    public BigDecimal getSpendAmount() {
+        return spendAmount;
     }
 
-    public void setSpendValue(BigDecimal spendValue) {
-        this.spendValue = spendValue;
+    public void setSpendAmount(BigDecimal spendAmount) {
+        this.spendAmount = spendAmount;
     }
 
     public String getDescription() {

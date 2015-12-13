@@ -35,4 +35,9 @@ public class BranchService {
         branchDao.persist(branch);
         return branch;
     }
+
+    @Transactional(readOnly=true)
+    public Branch getForUser(User user) {
+        return branchDao.getForUser(user);
+    }
 }

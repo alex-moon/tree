@@ -27,7 +27,7 @@ public class SpendService {
     @Autowired
     private IBranchDao branchDao;
     
-    @Transactional
+    @Transactional(readOnly=true)
     public List<Spend> getForUser(User user) {
         if (user.isBranchManager()) {
             Branch branch = branchDao.getForUser(user);
@@ -40,7 +40,15 @@ public class SpendService {
     }
 
     @Transactional
-    public Spend createSpend(CreateSpend createSpend) {
-        throw new RuntimeException("cunt a doodle doo bitch");
+    public Spend createSpend(Customer customer, Branch branch, CreateSpend request) {
+        Spend spend = new Spend();
+        spend.setBranch(branch);
+        spend.setCustomer(customer);
+        spend.setSpendAmount(request.getSpendAmount());
+        spend.setDescription(request.getDescription());
+        spend.setSpendDate(request.getSpendDate());
+
+        spendDao.persist(spend);
+        return spend;
     }
 }

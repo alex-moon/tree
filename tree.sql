@@ -117,7 +117,7 @@ CREATE TABLE spend (
     customer_id bigint NOT NULL REFERENCES customers (id),
     branch_id bigint NOT NULL REFERENCES branches (id),
     spend_date timestamp NOT NULL,
-    spend_value decimal (9, 2),
+    spend_amount decimal (9, 2),
     description TEXT NOT NULL
 );
 

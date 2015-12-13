@@ -5,4 +5,5 @@ import com.github.alex_moon.tree.models.User;
 
 public interface ICustomerDao extends IBaseDao {
     public Customer getForUser(User user);
+    public Customer getForBarcode(String customerBarcode);
 }

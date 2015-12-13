@@ -1,38 +1,49 @@
 package com.github.alex_moon.tree.api.requests;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import com.github.alex_moon.tree.models.Branch;
-import com.github.alex_moon.tree.models.Customer;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class CreateSpend {
-    @NotNull
-    private Customer customer;
-
-    @NotNull
-    private Branch branch;
+    @NotEmpty
+    private String customerBarcode;
 
     @NotNull
     private BigDecimal spendAmount;
 
-    public Customer getCustomer() {
-        return customer;
+    @NotEmpty
+    private String description;
+
+    @NotNull
+    private Date spendDate = new Date();
+
+    public Date getSpendDate() {
+        return spendDate;
     }
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setSpendDate(Date spendDate) {
+        this.spendDate = spendDate;
     }
-    public Branch getBranch() {
-        return branch;
+    public String getCustomerBarcode() {
+        return customerBarcode;
     }
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setCustomerBarcode(String customerBarcode) {
+        this.customerBarcode = customerBarcode;
     }
+
     public BigDecimal getSpendAmount() {
         return spendAmount;
     }
     public void setSpendAmount(BigDecimal spendAmount) {
         this.spendAmount = spendAmount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

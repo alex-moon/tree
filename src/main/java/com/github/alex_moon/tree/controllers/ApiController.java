@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,6 +58,10 @@ public class ApiController {
         return new ResponseEntity<Response>(new Response(errors), status);
     }
 
+    protected ResponseEntity<Response> errorResponse(String error) {
+        return errorResponse(error, HttpStatus.OK);
+    }
+
     protected ResponseEntity<Response> forbiddenResponse() {
         return errorResponse("You are not authorised to make this request.", HttpStatus.FORBIDDEN);
     }
@@ -95,10 +100,21 @@ public class ApiController {
 
     @RequestMapping(value="/spend", method=RequestMethod.POST)
     public ResponseEntity<Response> createSpend(@RequestBody @Valid CreateSpend request, BindingResult bindingResult) {
+        if (!getSessionUser().isBranchManager()) {
+            return forbiddenResponse();
+        }
         if (bindingResult.hasErrors()) {
             return errorResponse(bindingResult);
         }
-        Spend spend = spendService.createSpend(request);
+        Branch branch = branchService.getForUser(getSessionUser());
+        if (branch == null) {
+            return errorResponse("Invalid branch API key supplied");
+        }
+        Customer customer = customerService.getForBarcode(request.getCustomerBarcode());
+        if (customer == null) {
+            return errorResponse("Invalid customer barcode supplied");
+        }
+        Spend spend = spendService.createSpend(customer, branch, request);
         return successResponse(spend);
     }
 

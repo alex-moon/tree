@@ -37,6 +37,11 @@ public class CustomerService {
         return customer;
     }
 
+    @Transactional(readOnly=true)
+    public Customer getForBarcode(String customerBarcode) {
+        return customerDao.getForBarcode(customerBarcode);
+    }
+
     private String generateBarcode() {
         return String.format("TR%sEE", RandomStringUtils.randomNumeric(6));
     }
