@@ -2,6 +2,10 @@
     <h2>Welcome</h2>
     <p>The Tree is a proof of concept of the manager-assigned customers hierarchy idea.</p>
     <p><a href="/tree/spend/">See your spend</a></p>
+    <p><a href="/tree/recommendation/">See your recommendations</a></p>
+    {{# if user }}
+    <p>We have a user: {{ user }}</p>
+    {{/ if }}
 {{/ partial }}
 
 {{> base }}
