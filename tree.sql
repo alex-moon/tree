@@ -86,12 +86,13 @@ CREATE TABLE customers (
     id bigserial primary key,
     user_id int NULL REFERENCES users (id),
     name text NOT NULL,
+    postcode text NOT NULL,
     barcode text NOT NULL UNIQUE
 );
 
 INSERT INTO customers VALUES
-(1, 7, 'Alex Moon', 'TR123456EE'),
-(2, 8, 'Joe Faquechitte', 'TR654321EE');
+(1, 7, 'Alex Moon', 'NE3 2NR', 'TR123456EE'),
+(2, 8, 'Joe Faquechitte', 'N4 1EJ', 'TR654321EE');
 
 
 -- ------------------------------------------------------------------

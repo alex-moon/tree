@@ -1,17 +1,19 @@
 package com.github.alex_moon.tree.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.alex_moon.tree.recommendation.Recommendation;
+import com.github.alex_moon.tree.models.Customer;
+import com.github.alex_moon.tree.recommendation.entities.Branch;
+import com.github.alex_moon.tree.recommendation.repositories.BranchRepository;
 
 @Service
 public class RecommendationService {
-    public RecommendationService() {
-    }
+    @Autowired
+    BranchRepository branchRepository;
 
-    public Recommendation getByUsername(String username) {
-        Recommendation result = new Recommendation();
-        result.setRecommendation("lol shit here");
-        return result;
+    public Iterable<Branch> findBranchesForCustomer(Customer customer) {
+        String postcodePrefix = customer.getPostcode().split(" ")[0];
+        return branchRepository.findByPostcode(postcodePrefix);
     }
 }

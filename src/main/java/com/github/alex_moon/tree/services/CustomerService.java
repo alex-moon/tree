@@ -41,6 +41,12 @@ public class CustomerService {
     public Customer getForBarcode(String customerBarcode) {
         return customerDao.getForBarcode(customerBarcode);
     }
+    
+    @Transactional(readOnly=true)
+    public Customer getByUsername(String username) {
+        User user = userDao.getByUsername(username);
+        return customerDao.getForUser(user);
+    }
 
     private String generateBarcode() {
         return String.format("TR%sEE", RandomStringUtils.randomNumeric(6));

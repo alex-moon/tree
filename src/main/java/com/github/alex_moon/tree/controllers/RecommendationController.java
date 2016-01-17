@@ -7,18 +7,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.alex_moon.tree.models.Customer;
+import com.github.alex_moon.tree.services.CustomerService;
 import com.github.alex_moon.tree.services.RecommendationService;
 
 @Controller
 public class RecommendationController {
     @Autowired
-    private RecommendationService service;
+    private RecommendationService recommendationService;
+    
+    @Autowired
+    private CustomerService customerService;
     
     @RequestMapping(value="/recommendation/")
     public ModelAndView spend(Principal principal) {
         String username = principal.getName();
-        ModelAndView model = new ModelAndView("recommend");
-        model.addObject("recommendation", service.getByUsername(username));
+        Customer customer = customerService.getByUsername(username);
+        ModelAndView model = new ModelAndView("recommendation");
+        model.addObject("branches", recommendationService.findBranchesForCustomer(customer));
         return model;
     }
 }

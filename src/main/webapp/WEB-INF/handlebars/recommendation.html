@@ -1,0 +1,13 @@
+{{# partial "content" }}
+    <h2>Your Recommendations</h2>
+    {{# if branches }}
+    <table>
+        <tr><th>Name</th><th>Postcode</th></tr>
+        {{# branches }}
+            <tr><td>{{ name }}</td><td>{{ postcode }}</td></tr>
+        {{/ branches }}
+    </table>
+    {{/ if }}
+{{/ partial }}
+
+{{> base }}
