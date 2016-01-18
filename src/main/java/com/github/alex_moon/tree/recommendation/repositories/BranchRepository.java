@@ -7,9 +7,9 @@ import com.github.alex_moon.tree.recommendation.entities.Branch;
 
 public interface BranchRepository extends GraphRepository<Branch> {
     @Query(
-          "MATCH (branch:Branch)-[:STOCKS]->(products:Product) "
+          "MATCH (branch:Branch)-[stocks:STOCKS]->(products:Product) "
         + "WHERE branch.postcode =~ ({0} + '.*') "
-        + "RETURN branch, products"
+        + "RETURN branch, stocks, products"
     )
     Iterable<Branch> findByPostcode(String postcode);
 }
