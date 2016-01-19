@@ -13,7 +13,6 @@ public class RecommendationService {
     BranchRepository branchRepository;
 
     public Iterable<Branch> findBranchesForCustomer(Customer customer) {
-        String postcodePrefix = customer.getPostcode().split(" ")[0];
-        return branchRepository.findByPostcode(postcodePrefix);
+        return branchRepository.recommendForCustomer(customer.getId());
     }
 }

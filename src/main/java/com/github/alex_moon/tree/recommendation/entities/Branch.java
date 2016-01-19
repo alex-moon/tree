@@ -1,10 +1,8 @@
 package com.github.alex_moon.tree.recommendation.entities;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -14,18 +12,18 @@ public class Branch {
     @GraphId
     Long nodeId;
 
-    String id;
+    Integer id;
     String name;
     String postcode;
 
-    @Relationship(type="STOCKS", direction=Relationship.OUTGOING)
-    Set<Product> products = new HashSet<>();
+    @Relationship(type="TRANSACTED", direction=Relationship.OUTGOING)
+    Set<Transaction> transactions = new HashSet<>();
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,14 +41,5 @@ public class Branch {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
-    }
-
-    @Relationship(type="STOCKS", direction=Relationship.OUTGOING)
-    public Collection<Product> getProducts() {
-        return IteratorUtil.asCollection(products);
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 }

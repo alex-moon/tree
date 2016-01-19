@@ -26,7 +26,7 @@ import com.github.alex_moon.tree.api.responses.Response;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.models.Model;
-import com.github.alex_moon.tree.models.Spend;
+import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.BranchService;
 import com.github.alex_moon.tree.services.CustomerService;
@@ -114,7 +114,7 @@ public class ApiController {
         if (customer == null) {
             return errorResponse("Invalid customer barcode supplied");
         }
-        Spend spend = spendService.createSpend(customer, branch, request);
+        Transaction spend = spendService.createSpend(customer, branch, request);
         return successResponse(spend);
     }
 

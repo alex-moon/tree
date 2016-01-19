@@ -18,8 +18,8 @@ import com.github.alex_moon.tree.models.Customer;
 
 
 @Entity
-@Table(name="spend")
-public class Spend implements Model {
+@Table(name="transactions")
+public class Transaction implements Model {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -33,11 +33,11 @@ public class Spend implements Model {
     @JoinColumn(name="branch_id")
     private Branch branch;
 
-    @Column(name="spend_date")
-    private Date spendDate;
+    @Column(name="transaction_date")
+    private Date transactionDate;
 
-    @Column(name="spend_amount")
-    private BigDecimal spendAmount;
+    @Column(name="spend")
+    private BigDecimal spend;
 
     @Column(name="description")
     private String description;
@@ -45,7 +45,7 @@ public class Spend implements Model {
     public String toString() {
         return String.format(
             "%s (£%s from %s to %s at %s)",
-            description, spendAmount, customer, branch, spendDate
+            description, spend, customer, branch, transactionDate
         );
     }
 
@@ -73,20 +73,20 @@ public class Spend implements Model {
         this.branch = branch;
     }
 
-    public Date getSpendDate() {
-        return spendDate;
+    public Date getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setSpendDate(Date spendDate) {
-        this.spendDate = spendDate;
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
-    public BigDecimal getSpendAmount() {
-        return spendAmount;
+    public BigDecimal getSpend() {
+        return spend;
     }
 
-    public void setSpendAmount(BigDecimal spendAmount) {
-        this.spendAmount = spendAmount;
+    public void setSpend(BigDecimal spend) {
+        this.spend = spend;
     }
 
     public String getDescription() {

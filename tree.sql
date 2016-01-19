@@ -113,22 +113,23 @@ INSERT INTO branches VALUES
 -- ------------------------------------------------------------------
 -- SPEND
 -- ------------------------------------------------------------------
-CREATE TABLE spend (
+CREATE TABLE transactions (
     id bigserial NOT NULL PRIMARY KEY,
     customer_id bigint NOT NULL REFERENCES customers (id),
     branch_id bigint NOT NULL REFERENCES branches (id),
-    spend_date timestamp NOT NULL,
-    spend_amount decimal (9, 2),
-    description TEXT NOT NULL
+    transaction_date timestamp NOT NULL,
+    spend decimal (9, 2),
+    description TEXT NOT NULL,
+    reference TEXT NOT NULL UNIQUE
 );
 
-INSERT INTO spend VALUES
-(1, 1, 1, '2015-07-08 12:34', 42.69, 'Beer'),
-(2, 1, 1, '2015-07-10 23:45', 12.34, 'Wine'),
-(3, 1, 2, '2015-07-12 01:23', 7.99, 'Spirits'),
-(4, 2, 1, '2015-07-14 21:09', 23.50, 'Tarpaulin'),
-(5, 2, 1, '2015-07-16 10:01', 12.99, 'Stain Remover'),
-(6, 2, 2, '2015-07-18 00:42', 69.42, 'Shovel');
+INSERT INTO transactions VALUES
+(1, 1, 1, '2015-07-08 12:34', 42.69, 'Beer', 'REF12345'),
+(2, 1, 2, '2015-07-10 23:45', 12.34, 'Wine', 'REF23456'),
+(3, 1, 1, '2015-07-12 01:23', 7.99, 'Vodka', 'REF34567'),
+(4, 2, 2, '2015-07-14 21:09', 23.50, 'Beer', 'REF45678'),
+(5, 2, 1, '2015-07-16 10:01', 12.99, 'Wine', 'REF56789'),
+(6, 2, 2, '2015-07-18 00:42', 69.42, 'Gin', 'REF67890');
 
 
 -- here's some stupid fucking shit because postgresql is fucking elite
@@ -136,6 +137,6 @@ SELECT pg_catalog.setval('branches_id_seq', 10, false);
 SELECT pg_catalog.setval('customers_id_seq', 10, false);
 SELECT pg_catalog.setval('group_members_id_seq', 10, false);
 SELECT pg_catalog.setval('groups_id_seq', 10, false);
-SELECT pg_catalog.setval('spend_id_seq', 10, false);
+SELECT pg_catalog.setval('transactions_id_seq', 10, false);
 SELECT pg_catalog.setval('user_types_id_seq', 10, false);
 SELECT pg_catalog.setval('users_id_seq', 10, true);

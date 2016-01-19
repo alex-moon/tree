@@ -7,9 +7,19 @@ import com.github.alex_moon.tree.recommendation.entities.Branch;
 
 public interface BranchRepository extends GraphRepository<Branch> {
     @Query(
-          "MATCH (branch:Branch)-[stocks:STOCKS]->(products:Product) "
+          "MATCH (branch:Branch) "
         + "WHERE branch.postcode =~ ({0} + '.*') "
-        + "RETURN branch, stocks, products"
+        + "RETURN branch, products"
     )
     Iterable<Branch> findByPostcode(String postcode);
+
+    // @todo [:TRANSACTED] would be fine - the relationships aren't special
+    // @todo figure out how to make node type unique for relationship
+    @Query(
+        "MATCH (c:Customer)-[:TRANSACTED]->(notT)<-[:TRANSACTED]-(p:Product), "
+      + "      (p)-[tp:TRANSACTED]->(t)<-[tb:TRANSACTED]-(b:Branch) "
+      + "WHERE c.id = {0} "
+      + "RETURN b, tb, t, tp, p"
+    )
+    Iterable<Branch> recommendForCustomer(int customerId);
 }

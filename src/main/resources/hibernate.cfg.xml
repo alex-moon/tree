@@ -10,6 +10,6 @@
     <mapping class="com.github.alex_moon.tree.models.User" />
     <mapping class="com.github.alex_moon.tree.models.Customer" />
     <mapping class="com.github.alex_moon.tree.models.Branch" />
-    <mapping class="com.github.alex_moon.tree.models.Spend" />
+    <mapping class="com.github.alex_moon.tree.models.Transaction" />
   </session-factory>
 </hibernate-configuration>

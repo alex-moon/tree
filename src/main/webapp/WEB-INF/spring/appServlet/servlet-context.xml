@@ -54,7 +54,7 @@
         </constructor-arg>
     </bean>
 
-    <bean id="spendDao" class="com.github.alex_moon.tree.models.SpendDao">
+    <bean id="transactionDao" class="com.github.alex_moon.tree.models.TransactionDao">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

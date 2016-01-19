@@ -16,8 +16,8 @@ public class Product {
     public String barcode;
     // @todo RRP? Could be handy I guess... 
 
-    @Relationship(type="STOCKS", direction=Relationship.INCOMING)
-    Set<Branch> branches = new HashSet<>();
+    @Relationship(type="TRANSACTED", direction=Relationship.OUTGOING)
+    Set<Transaction> transactions = new HashSet<>();
 
     public String getName() {
         return name;
@@ -33,13 +33,5 @@ public class Product {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public Set<Branch> getBranches() {
-        return branches;
-    }
-
-    public void setBranches(Set<Branch> branches) {
-        this.branches = branches;
     }
 }
