@@ -16,11 +16,11 @@ public class TransactionDao extends BaseDao implements ITransactionDao {
     private List<Transaction> getWhere(Criterion criterion) {
         @SuppressWarnings("unchecked")
         List<Transaction> spend = (List<Transaction>) sessionFactory.getCurrentSession()
-                .createCriteria(Transaction.class)
-                .add(criterion)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.desc("transactionDate"))
-                .list(); 
+            .createCriteria(Transaction.class)
+            .add(criterion)
+            .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+            .addOrder(Order.desc("createdDate"))
+            .list(); 
         return spend;
     }
 
@@ -30,5 +30,9 @@ public class TransactionDao extends BaseDao implements ITransactionDao {
 
     public List<Transaction> getForBranch(Branch branch) {
         return getWhere(Restrictions.eq("branch", branch));
+    }
+
+    public List<Transaction> getForBranches(List<Branch> branches) {
+        return getWhere(Restrictions.in("branch", branches));
     }
 }

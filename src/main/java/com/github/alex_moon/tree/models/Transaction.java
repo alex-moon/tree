@@ -33,8 +33,8 @@ public class Transaction implements Model {
     @JoinColumn(name="branch_id")
     private Branch branch;
 
-    @Column(name="transaction_date")
-    private Date transactionDate;
+    @Column(name="created_date")
+    private Date createdDate;
 
     @Column(name="spend")
     private BigDecimal spend;
@@ -45,7 +45,7 @@ public class Transaction implements Model {
     public String toString() {
         return String.format(
             "%s (£%s from %s to %s at %s)",
-            description, spend, customer, branch, transactionDate
+            description, spend, customer, branch, createdDate
         );
     }
 
@@ -73,12 +73,12 @@ public class Transaction implements Model {
         this.branch = branch;
     }
 
-    public Date getTransactionDate() {
-        return transactionDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public BigDecimal getSpend() {

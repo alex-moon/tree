@@ -4,6 +4,7 @@
     <table class="table-striped table-bordered">
         <tr>
             <th>Date</th>
+            <th>Branch</th>
             <th>Customer</th>
             <th>Amount</th>
             <th>Description</th>
@@ -11,6 +12,7 @@
         {{# transactions }}
             <tr>
                 <td>{{ createdDate }}</td>
+                <td>{{ branch }}</td>
                 <td>{{ customer }}</td>
                 <td>&pound;{{ spend }}</td>
                 <td>{{ description }}</td>

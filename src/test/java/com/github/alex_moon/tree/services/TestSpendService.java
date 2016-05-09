@@ -10,7 +10,7 @@ import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 
 public class TestSpendService {
-    private SpendService spendService = new SpendService();
+    private TransactionService transactionService = new TransactionService();
     
     @Before
     public void setUp() {
@@ -19,7 +19,7 @@ public class TestSpendService {
     @Test
     public void testGetForNonCustomerBranchUser() {
         User user = new User();
-        List<Transaction> spend = spendService.getForUser(user);
+        List<Transaction> spend = transactionService.getForUser(user);
         Assert.assertEquals(spend.size(), 0);
     }
 }

@@ -9,4 +9,5 @@ import com.github.alex_moon.tree.models.Transaction;
 public interface ITransactionDao extends IBaseDao {
     public List<Transaction> getForCustomer(Customer customer);
     public List<Transaction> getForBranch(Branch branch);
+    public List<Transaction> getForBranches(List<Branch> branches);
 }
