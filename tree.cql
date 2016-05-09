@@ -1,3 +1,6 @@
+// @todo rewrite this to use the actual data in the DB
+// what'd be real fucking handy is a fucking script to
+// do this programmatically - sick of maintaining this
 MATCH (n) DETACH DELETE n;
 
 CREATE
