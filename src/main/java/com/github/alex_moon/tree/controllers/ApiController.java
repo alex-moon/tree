@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ import com.github.alex_moon.tree.api.responses.Response;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
 import com.github.alex_moon.tree.models.Model;
-import com.github.alex_moon.tree.models.Spend;
+import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.BranchService;
 import com.github.alex_moon.tree.services.CustomerService;
@@ -114,7 +113,7 @@ public class ApiController {
         if (customer == null) {
             return errorResponse("Invalid customer barcode supplied");
         }
-        Spend spend = spendService.createSpend(customer, branch, request);
+        Transaction spend = spendService.createSpend(customer, branch, request);
         return successResponse(spend);
     }
 

@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.alex_moon.tree.api.requests.CreateSpend;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
-import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.models.interfaces.IBranchDao;
 import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
 import com.github.alex_moon.tree.models.interfaces.ITransactionDao;
+import com.github.alex_moon.tree.models.Transaction;
 
 @Service
 public class SpendService {
@@ -49,7 +49,7 @@ public class SpendService {
         spend.setCustomer(customer);
         spend.setSpend(request.getSpendAmount());
         spend.setDescription(request.getDescription());
-        spend.setTransactionDate(request.getSpendDate());
+        spend.setCreatedDate(request.getSpendDate());
 
         spendDao.persist(spend);
         return spend;

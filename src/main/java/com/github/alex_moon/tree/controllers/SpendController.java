@@ -24,7 +24,7 @@ public class SpendController {
         User user = userService.getByUsername(principal.getName());
         String template = getSpendTemplateForUser(user);
         ModelAndView model = new ModelAndView(template);
-        model.addObject("spend", spendService.getForUser(user));
+        model.addObject("transactions", spendService.getForUser(user));
         return model;
     }
 

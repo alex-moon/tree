@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.alex_moon.tree.models.Spend;
+import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 
 public class TestSpendService {
@@ -19,7 +19,7 @@ public class TestSpendService {
     @Test
     public void testGetForNonCustomerBranchUser() {
         User user = new User();
-        List<Spend> spend = spendService.getForUser(user);
+        List<Transaction> spend = spendService.getForUser(user);
         Assert.assertEquals(spend.size(), 0);
     }
 }

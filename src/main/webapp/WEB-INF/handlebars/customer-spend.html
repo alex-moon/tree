@@ -1,6 +1,6 @@
 {{# partial "content" }}
     <h2>Your Statement</h2>
-    {{# if spend }}
+    {{# if transactions }}
     <table class="table-striped table-bordered">
         <tr>
             <th>Date</th>
@@ -8,14 +8,14 @@
             <th>Amount</th>
             <th>Description</th>
         </tr>
-        {{# spend }}
+        {{# transactions }}
             <tr>
-                <td>{{ spendDate }}</td>
+                <td>{{ createdDate }}</td>
                 <td>{{ branch }}</td>
-                <td>&pound;{{ spendValue }}</td>
+                <td>&pound;{{ spend }}</td>
                 <td>{{ description }}</td>
             </tr>
-        {{/ spend }}
+        {{/ transactions }}
     </table>
     {{/ if }}
 {{/ partial }}
