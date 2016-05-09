@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.alex_moon.tree.models.User;
-import com.github.alex_moon.tree.services.SpendService;
+import com.github.alex_moon.tree.services.TransactionService;
 import com.github.alex_moon.tree.services.UserService;
 
 @Controller
-public class SpendController {
+public class TransactionController {
     @Autowired
-    private SpendService spendService;
+    private TransactionService transactionService;
 
     @Autowired
     private UserService userService;
@@ -24,7 +24,7 @@ public class SpendController {
         User user = userService.getByUsername(principal.getName());
         String template = getSpendTemplateForUser(user);
         ModelAndView model = new ModelAndView(template);
-        model.addObject("transactions", spendService.getForUser(user));
+        model.addObject("transactions", transactionService.getForUser(user));
         return model;
     }
 

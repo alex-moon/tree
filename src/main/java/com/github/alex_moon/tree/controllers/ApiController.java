@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.alex_moon.tree.ApiHelper;
 import com.github.alex_moon.tree.api.requests.CreateBranch;
 import com.github.alex_moon.tree.api.requests.CreateCustomer;
-import com.github.alex_moon.tree.api.requests.CreateSpend;
+import com.github.alex_moon.tree.api.requests.CreateTransaction;
 import com.github.alex_moon.tree.api.responses.Response;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
@@ -29,7 +29,7 @@ import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.services.BranchService;
 import com.github.alex_moon.tree.services.CustomerService;
-import com.github.alex_moon.tree.services.SpendService;
+import com.github.alex_moon.tree.services.TransactionService;
 
 @RestController
 @RequestMapping("/api")
@@ -44,7 +44,7 @@ public class ApiController {
     private BranchService branchService;
 
     @Autowired
-    private SpendService spendService;
+    private TransactionService transactionService;
 
     protected ResponseEntity<Response> errorResponse(BindingResult bindingResult) {
         Response response = new Response(bindingResult.getFieldErrors());
@@ -98,7 +98,7 @@ public class ApiController {
     }
 
     @RequestMapping(value="/spend", method=RequestMethod.POST)
-    public ResponseEntity<Response> createSpend(@RequestBody @Valid CreateSpend request, BindingResult bindingResult) {
+    public ResponseEntity<Response> createTransaction(@RequestBody @Valid CreateTransaction request, BindingResult bindingResult) {
         if (!getSessionUser().isBranchManager()) {
             return forbiddenResponse();
         }
@@ -113,7 +113,7 @@ public class ApiController {
         if (customer == null) {
             return errorResponse("Invalid customer barcode supplied");
         }
-        Transaction spend = spendService.createSpend(customer, branch, request);
+        Transaction spend = transactionService.createTransaction(customer, branch, request);
         return successResponse(spend);
     }
 

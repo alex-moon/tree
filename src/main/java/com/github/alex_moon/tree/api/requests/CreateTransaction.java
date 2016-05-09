@@ -7,24 +7,24 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class CreateSpend {
+public class CreateTransaction {
     @NotEmpty
     private String customerBarcode;
 
     @NotNull
-    private BigDecimal spendAmount;
+    private BigDecimal spend;
 
     @NotEmpty
     private String description;
 
     @NotNull
-    private Date spendDate = new Date();
+    private Date createdDate = new Date();
 
-    public Date getSpendDate() {
-        return spendDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
-    public void setSpendDate(Date spendDate) {
-        this.spendDate = spendDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
     public String getCustomerBarcode() {
         return customerBarcode;
@@ -33,11 +33,11 @@ public class CreateSpend {
         this.customerBarcode = customerBarcode;
     }
 
-    public BigDecimal getSpendAmount() {
-        return spendAmount;
+    public BigDecimal getSpend() {
+        return spend;
     }
-    public void setSpendAmount(BigDecimal spendAmount) {
-        this.spendAmount = spendAmount;
+    public void setSpend(BigDecimal spend) {
+        this.spend = spend;
     }
 
     public String getDescription() {
