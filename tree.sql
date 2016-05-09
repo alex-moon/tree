@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS spend;
+DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS branches;
 DROP TABLE IF EXISTS users;
@@ -61,7 +61,8 @@ CREATE TABLE users (
     email text NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
     user_type_id int NOT NULL DEFAULT 1 REFERENCES user_types (id),
-    api_key text NULL
+    api_key text NULL,
+    manager_user_id int NULL REFERENCES users (id)
 );
 
 INSERT INTO users VALUES

@@ -10,16 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.alex_moon.tree.api.requests.CreateSpend;
 import com.github.alex_moon.tree.models.Branch;
 import com.github.alex_moon.tree.models.Customer;
-import com.github.alex_moon.tree.models.Spend;
+import com.github.alex_moon.tree.models.Transaction;
 import com.github.alex_moon.tree.models.User;
 import com.github.alex_moon.tree.models.interfaces.IBranchDao;
 import com.github.alex_moon.tree.models.interfaces.ICustomerDao;
-import com.github.alex_moon.tree.models.interfaces.ISpendDao;
+import com.github.alex_moon.tree.models.interfaces.ITransactionDao;
 
 @Service
 public class SpendService {
     @Autowired
-    private ISpendDao spendDao;
+    private ITransactionDao spendDao;
     
     @Autowired
     private ICustomerDao customerDao;
@@ -28,25 +28,28 @@ public class SpendService {
     private IBranchDao branchDao;
     
     @Transactional(readOnly=true)
-    public List<Spend> getForUser(User user) {
-        if (user.isBranchManager()) {
+    public List<Transaction> getForUser(User user) {
+        if (user.isAreaManager()) {
+            List<Branch> branches = branchDao.getForAreaManager(user);
+            return spendDao.getForBranches(branches);
+        } else if (user.isBranchManager()) {
             Branch branch = branchDao.getForUser(user);
             return spendDao.getForBranch(branch);
         } else if (user.isCustomer()) {
             Customer customer = customerDao.getForUser(user);
             return spendDao.getForCustomer(customer);
         }
-        return new ArrayList<Spend>();
+        return new ArrayList<Transaction>();
     }
 
     @Transactional
-    public Spend createSpend(Customer customer, Branch branch, CreateSpend request) {
-        Spend spend = new Spend();
+    public Transaction createSpend(Customer customer, Branch branch, CreateSpend request) {
+        Transaction spend = new Transaction();
         spend.setBranch(branch);
         spend.setCustomer(customer);
-        spend.setSpendAmount(request.getSpendAmount());
+        spend.setSpend(request.getSpendAmount());
         spend.setDescription(request.getDescription());
-        spend.setSpendDate(request.getSpendDate());
+        spend.setTransactionDate(request.getSpendDate());
 
         spendDao.persist(spend);
         return spend;

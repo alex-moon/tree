@@ -2,9 +2,12 @@ package com.github.alex_moon.tree.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,11 +15,11 @@ import javax.persistence.Table;
 public class User implements Model {
     public static final int USER_TYPE_UNASSIGNED = 1;
     public static final int USER_TYPE_BRANCH_MANAGER = 2;
-    public static final int USER_TYPE_REGIONAL_MANAGER = 3;
-    public static final int USER_TYPE_NATIONAL_MANAGER = 4;
+    public static final int USER_TYPE_AREA_MANAGER = 3;
+    public static final int USER_TYPE_REGIONAL_MANAGER = 4;
     public static final int USER_TYPE_SUPERUSER = 5;
     public static final int USER_TYPE_CUSTOMER = 6;
-    
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -36,6 +39,10 @@ public class User implements Model {
 
     @Column(name="api_key")
     private String apiKey;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="manager_user_id")
+    private User manager;
 
     public String toString() {
         return String.format("%s <%s>", username, email);
@@ -65,13 +72,22 @@ public class User implements Model {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public User getManager() {
+        return manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
     public int getUserTypeId() {
         return userTypeId;
     }
     public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
-    
+
     public void setUserTypeBranchManager() {
         this.userTypeId = USER_TYPE_BRANCH_MANAGER;
     }
@@ -81,6 +97,12 @@ public class User implements Model {
 
     public boolean isSuperuser() {
         return userTypeId == USER_TYPE_SUPERUSER;
+    }
+    public boolean isRegionalManager() {
+        return userTypeId == USER_TYPE_REGIONAL_MANAGER;
+    }
+    public boolean isAreaManager() {
+        return userTypeId == USER_TYPE_AREA_MANAGER;
     }
     public boolean isBranchManager() {
         return userTypeId == USER_TYPE_BRANCH_MANAGER;
