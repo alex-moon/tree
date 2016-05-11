@@ -2,14 +2,9 @@
     <h2>Login</h2>
     <form id="form" method="POST" class="form-horizontal">
         <input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"/>
+
         {{# if error }}
-            <div>Something went wrong lol</div>
-        {{/ if }}
-        {{# if logout }}
-            <div>You've logged out successfully.</div>
-        {{/ if }}
-        {{# if time }}
-            <div>You've been logged out due to inactivity.</div>
+            <p>{{ error }}</p>
         {{/ if }}
 
         <div class="form-group">
