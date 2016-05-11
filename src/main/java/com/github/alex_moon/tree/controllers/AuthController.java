@@ -28,7 +28,7 @@ public class AuthController {
     }
 
     private String getErrorMessageForCode(int code) {
-        if (code == 1) {
+        if (code == LOGIN_FAIL) {
             return "You entered an incorrect username or password.";
         }
         return "There was a technical error.";

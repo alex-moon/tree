@@ -66,4 +66,8 @@ public class Branch implements Model {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public User getArea() {
+        return this.user.getManager();
+    }
 }

@@ -12,7 +12,7 @@ import com.github.alex_moon.tree.services.TransactionService;
 import com.github.alex_moon.tree.services.UserService;
 
 @Controller
-public class TransactionController {
+public class SpendController {
     @Autowired
     private TransactionService transactionService;
 
@@ -29,7 +29,9 @@ public class TransactionController {
     }
 
     private String getSpendTemplateForUser(User user) {
-        if (user.isAreaManager()) {
+        if (user.isRegionalManager()) {
+            return "regional-spend";
+        } else if (user.isAreaManager()) {
             return "area-spend";
         } else if (user.isBranchManager()) {
             return "branch-spend";

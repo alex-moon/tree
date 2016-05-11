@@ -1,0 +1,27 @@
+{{# partial "content" }}
+    <h2>Your Statement</h2>
+    {{# if transactions }}
+    <table class="table-striped table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Area</th>
+            <th>Branch</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
+        {{# transactions }}
+            <tr>
+                <td>{{ createdDate }}</td>
+                <td>{{ branch.area }}</td>
+                <td>{{ branch }}</td>
+                <td>{{ customer }}</td>
+                <td>&pound;{{ spend }}</td>
+                <td>{{ description }}</td>
+            </tr>
+        {{/ transactions }}
+    </table>
+    {{/ if }}
+{{/ partial }}
+
+{{> base }}

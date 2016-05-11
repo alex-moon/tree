@@ -29,7 +29,10 @@ public class TransactionService {
     
     @Transactional(readOnly=true)
     public List<Transaction> getForUser(User user) {
-        if (user.isAreaManager()) {
+        if (user.isRegionalManager()) {
+            List<Branch> branches = branchDao.getForRegionalManager(user);
+            return transactionDao.getForBranches(branches);
+        } else if (user.isAreaManager()) {
             List<Branch> branches = branchDao.getForAreaManager(user);
             return transactionDao.getForBranches(branches);
         } else if (user.isBranchManager()) {

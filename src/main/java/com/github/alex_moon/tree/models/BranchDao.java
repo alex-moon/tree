@@ -32,4 +32,18 @@ public class BranchDao extends BaseDao implements IBranchDao {
             .list();
         return branches;
     }
+
+    public List<Branch> getForRegionalManager(User user) {
+        @SuppressWarnings("unchecked")
+        List<Branch> branches = (List<Branch>) sessionFactory.getCurrentSession()
+            .createCriteria(Branch.class, "branch")
+            .setFetchMode("branch.user", FetchMode.JOIN)
+            .createAlias("branch.user", "user", JoinType.INNER_JOIN)
+            .setFetchMode("user.manager", FetchMode.JOIN)
+            .createAlias("user.manager", "manager", JoinType.INNER_JOIN)
+            .setFetchMode("manager.manager", FetchMode.JOIN)
+            .add(Restrictions.eq("manager.manager", user))
+            .list();
+        return branches;
+    }
 }
