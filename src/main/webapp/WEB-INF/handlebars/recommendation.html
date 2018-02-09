@@ -1,0 +1,19 @@
+{{# partial "content" }}
+    <h2>Your Recommendations</h2>
+    {{# if branches }}
+    <table>
+        <tr><th>Name</th><th>Postcode</th><th>Products</th></tr>
+        {{# branches }}
+            <tr><td>{{ name }}</td><td>{{ postcode }}</td><td>
+            <ul>
+                {{# products }}
+                    <li>{{ name }} ({{ barcode}})</li>
+                {{/ products}}
+            </ul>
+            </td></tr>
+        {{/ branches }}
+    </table>
+    {{/ if }}
+{{/ partial }}
+
+{{> base }}

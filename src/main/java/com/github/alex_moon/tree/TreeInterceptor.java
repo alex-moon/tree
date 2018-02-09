@@ -10,9 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.github.alex_moon.tree.models.User;
+import com.github.alex_moon.tree.services.UserService;
+
 public class TreeInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     ApiHelper apiHelper;
+    
+    @Autowired
+    UserService userService;
 
     @Override
     public boolean preHandle(
@@ -39,7 +45,8 @@ public class TreeInterceptor extends HandlerInterceptorAdapter {
         if (modelAndView != null) {
             Principal principal = request.getUserPrincipal();
             if (principal != null) {
-                modelAndView.getModelMap().addAttribute("user", principal.getName());
+                User user = userService.getByUsername(principal.getName());
+                modelAndView.getModelMap().addAttribute("user", user);
             }
         }
     }

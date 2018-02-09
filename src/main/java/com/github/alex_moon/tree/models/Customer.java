@@ -30,6 +30,9 @@ public class Customer implements Model {
     @Column(name="barcode")
     private String barcode;
 
+    @Column(name="postcode")
+    private String postcode;
+
     public String toString() {
         return String.format("%s (%s)", name, user);
     }
@@ -57,5 +60,13 @@ public class Customer implements Model {
     }
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 }
